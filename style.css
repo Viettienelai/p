@@ -1,0 +1,1544 @@
+:root {
+  --blur: blur(20px);
+  --bg: rgba(255, 255, 255, 0.5);
+  --padding: 17px 15px 0;
+  --border-radius: 20px;
+  --shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  --bookmark-animation: bounce 1s ease-in-out forwards;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 400;
+  z-index: 0;
+  overflow-x: hidden;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.scroll-element {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 124%;
+  z-index: 1;
+}
+
+#bookmark-container {
+  position: absolute;
+  top: 280px;
+  width: 390px;
+  gap: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+}
+
+.container {
+  width: 370px;
+  backdrop-filter: var(--blur);
+  background: var(--bg);
+  padding: 10px 15px 10px 15px;
+  box-sizing: border-box;
+  border-radius: var(--border-radius);
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  z-index: 2;
+  box-shadow: var(--shadow);
+  animation: bookmark-container 1s cubic-bezier(0.175, 0.885, 0.32, 2) forwards;
+}
+
+.bookmark-item {
+  height: 85px;
+  width: 68px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 3;
+}
+
+.container .bookmark-item a {
+  width: 85px;
+  height: 85px;
+  transition: background-color 0.1s ease, transform 0.3s ease;
+  padding-top: 7px;
+  border-radius: 15px;
+}
+
+.bookmark-avatar {
+  width: 45px;
+  height: 45px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  z-index: 4;
+}
+
+.bookmark-name {
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 7px;
+  font-size: 11px;
+  color: #333;
+  position: absolute;
+  white-space: nowrap;
+  z-index: 5;
+}
+
+#bar-container {
+  pointer-events: none;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  top: 190px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100%;
+  z-index: 8;
+}
+
+#sticky-bar {
+  width: 95%;
+  max-width: 800px;
+  height: 70px;
+  position: relative;
+  top: -1px;
+  box-sizing: border-box;
+  font-size: 16px;
+  position: sticky;
+  z-index: 9;
+}
+
+#search-bar {
+  width: 90%;
+  pointer-events: auto;
+  width: 79%;
+  height: 50px;
+  top: 10px;
+  left: 10px;
+  border: none;
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.7);
+  box-sizing: border-box;
+  box-shadow: 0 0px 12px rgba(0, 0, 0, 0.8);
+  font-size: 16px;
+  border-radius: 100px;
+  position: relative;
+  z-index: 11;
+  padding-left: 16%;
+  outline-color: #FEC319;
+}
+
+#search-icon {
+  position: absolute;
+  left: 7%;
+  pointer-events: auto;
+  top: 20px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  z-index: 12;
+  animation: search-icon 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+#search-options {
+  padding: 10px 0px 10px 0px;
+  position: absolute;
+  border-radius: 20px;
+  pointer-events: auto;
+  top: 35px;
+  left: 7%;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0.5);
+  list-style: none;
+  width: 200px;
+  pointer-events: none;
+  overflow: hidden;
+  transform-origin: top left;
+  transform: scale(0);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+  z-index: 13;
+}
+
+#search-options a {
+  margin-left: 10px;
+  height: 30px;
+  width: 140px;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 15px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  color: black;
+  text-decoration: none;
+  opacity: 1;
+  transform: scale(1);
+  transition: all 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+}
+
+#search-options.active {
+  pointer-events: auto;
+  transform: scale(1);
+  opacity: 1;
+  z-index: 13;
+  visibility: visible;
+}
+
+.option-icon {
+  width: 25px;
+  height: 25px;
+  margin-right: 20px;
+}
+
+#background-blur {
+  position: fixed;
+  top: -200px;
+  left: -460px;
+  width: 250%;
+  height: 1500%;
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  background: rgba(0, 0, 0, 0.1);
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+#background-blur.active {
+  pointer-events: auto;
+  opacity: 1;
+  z-index: 10;
+}
+
+#clock-container {
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-83.5%);
+  width: 650px;
+  height: 200px;
+  z-index: 4;
+  scale: 0.6;
+}
+
+#area {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 14;
+  transition: all 0.3s ease;
+  border-radius: 20px;
+}
+
+#clock {
+  position: absolute;
+  width: 650px;
+  height: 200px;
+  padding-top: 40px;
+  padding-left: 14px;
+  box-sizing: border-box;
+  z-index: 15;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  background-color: rgba(91, 154, 165, 0.2);
+  box-shadow: 0 0px 12px rgba(255, 255, 255, 0.5);
+  border: 3px solid rgba(255, 255, 255, 0.1);
+}
+
+.block {
+  fill: #ffd500;
+  z-index: 16;
+}
+
+#sep3 {
+  top: 76px;
+  left: 415px;
+  background-color: rgb(255, 255, 255);
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  border-radius: 5px;
+  z-index: 17;
+  opacity: 1;
+  will-change: transform;
+  animation: moveDown 1s ease-out infinite;
+}
+
+#sep4 {
+  top: 116px;
+  left: 415px;
+  background-color: rgb(255, 255, 255);
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  border-radius: 5px;
+  z-index: 17;
+  opacity: 1;
+  will-change: transform;
+  animation: moveUp 1s ease-out infinite;
+}
+
+@keyframes moveDown {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+
+  30% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(20px) scaleX(0.5);
+  }
+
+  70% {
+    transform: translateY(40px) scale(1);
+  }
+
+  100% {
+    transform: translateY(40px) scale(1);
+  }
+}
+
+@keyframes moveUp {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+
+  30% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-20px) scaleX(1.5);
+  }
+
+  70% {
+    transform: translateY(-40px) scale(1);
+  }
+
+  100% {
+    transform: translateY(-40px) scale(1);
+  }
+}
+
+
+
+
+
+
+
+
+
+.popup-container {
+  display: none;
+  position: absolute;
+  z-index: 1000;
+  top: -500px;
+  left: 20%;
+  width: 300px;
+  height: 400px;
+  transform: scale(0);
+  opacity: 0;
+  transform-origin: 0 0;
+  transition: all 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+  pointer-events: none;
+}
+
+.popup-container.active {
+  transform: scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.popup-content {
+  background-color: #fefefe;
+  border-radius: 30px;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+}
+
+.popup-bookmarks-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 0fr);
+  width: 100%;
+  justify-items: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 30px;
+  border: 10px solid #E9EEF6;
+}
+
+.popup-bookmarks-grid .bookmark-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  opacity: 0;
+  /* Initial opacity for animation */
+  transform: translateY(-20px);
+  /* Initial position for animation */
+  height: 85.5px;
+  width: 86.9px;
+  position: static;
+  z-index: auto;
+  box-sizing: border-box;
+  transition: all 0.3s cubic-bezier(.25, .46, .45, .94);
+  border-radius: 15px;
+}
+
+.popup-container.active .popup-bookmarks-grid .bookmark-item {
+  animation: slideUpFadeIn 0.3s ease-out forwards;
+}
+
+.popup-bookmarks-grid .bookmark-item a {
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+  align-items: center;
+}
+
+.popup-bookmarks-grid .bookmark-item .popup-bookmark-avatar {
+  width: 45px;
+  height: 47px;
+  position: static;
+  top: 0;
+  z-index: auto;
+}
+
+.popup-bookmarks-grid .bookmark-item .bookmark-name {
+  font-size: 12px;
+  margin-top: 5px;
+  position: static;
+  transform: none;
+  left: auto;
+  z-index: auto;
+  color: #333;
+}
+
+/* Keyframes cho animation */
+@keyframes slideUpFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+#chat-bubble {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  right: 10px;
+  top: 10px;
+  border-radius: 100px;
+  background: radial-gradient(ellipse at bottom, #6d97c6 0%, #dfdfc2 100%);
+  box-sizing: border-box;
+  transition: all 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+  pointer-events: auto;
+  z-index: 10000;
+  overflow: hidden;
+}
+
+#chat-bubble:not(.expanded) {
+  cursor: pointer;
+  box-shadow: 0 0px 12px rgba(0, 0, 0, 0.8);
+}
+
+@property --deg {
+  syntax: '<angle>';
+  inherits: true;
+  initial-value: 0deg;
+}
+
+.chat-bubble-border-effect {
+  position: absolute;
+  /* Kích thước ban đầu giống bubble thu gọn, sẽ thay đổi bằng JS */
+  width: 50px;
+  height: 50px;
+  right: 10px;
+  top: 10px;
+  border-radius: 100px;
+  /* Ban đầu là hình tròn */
+  z-index: 9;
+  /* Đặt dưới chat-bubble nhưng trên background-blur-chat */
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+  /* Thêm transition cho opacity */
+}
+
+.chat-bubble-border-effect::before,
+.chat-bubble-border-effect::after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: conic-gradient(from var(--deg) at center,
+      #00c3ff,
+      #b3a1ff,
+      #fd8eff,
+      #ff7171,
+      #fec319,
+      #77ff99,
+      #00c3ff);
+  border-radius: inherit;
+  animation: autoRotate 4s linear infinite;
+  /* Animation xoay */
+}
+
+.chat-bubble-border-effect::after {
+  filter: blur(20px);
+  /* Hiệu ứng mờ cho lớp sau */
+}
+
+@keyframes autoRotate {
+  to {
+    --deg: 360deg;
+    /* Thay đổi giá trị của --deg để xoay */
+  }
+}
+
+/* Khi chat-bubble.expanded, điều chỉnh border-effect theo */
+#chat-bubble.expanded+.chat-bubble-border-effect {
+  width: 380px;
+  height: 610px;
+  top: -85px;
+  right: 0px;
+  border-radius: 25px;
+  /* Hình vuông/chữ nhật với góc bo */
+  opacity: 1;
+  /* Hiển thị khi expanded */
+}
+
+#chat-bubble.expanded {
+  width: 370px;
+  height: 600px;
+  top: -80px;
+  right: 5px;
+  border-radius: 20px;
+  z-index: 1000001;
+}
+
+.chat-bubble-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  z-index: 0;
+}
+
+#note-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 70px;
+  height: 70px;
+  border-bottom-right-radius: 100%;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.6);
+  position: relative;
+  cursor: pointer;
+  z-index: 2;
+  /* Bỏ transition transform ở đây nếu bạn không muốn scale khi không expanded */
+  /* transition: transform 0.3s ease-out; */
+}
+
+/* Pseudo-element cho hiệu ứng hover - TRẠNG THÁI EXPANDED */
+/* Đây là trạng thái mặc định của ::before, sẽ được áp dụng chỉ khi .expanded */
+#note-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(0, 123, 255);
+  box-shadow: 0 0 50px #3195ff,
+    0 0 5px #3195ff,
+    0 0 25px #3195ff;
+  border-bottom-right-radius: 100%;
+  transform: translateX(-45px) translateY(-45px);
+  transition: all 0.3s ease-in-out;
+  z-index: 1;
+  opacity: 0;
+  /* Mặc định ẩn, chỉ hiện khi #chat-bubble.expanded */
+  display: none;
+}
+
+/* Khi hover vào #note-background VÀ chat-bubble ĐÃ EXPANDED */
+#chat-bubble.expanded #note-background:hover::before {
+  transform: translateX(0) translateY(0);
+  opacity: 1;
+}
+
+/* Các icon (note-default và note-hover) */
+.note-icon {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  width: 30px;
+  height: 30px;
+  z-index: 2;
+  opacity: 0;
+  /* Mặc định ẩn tất cả các icon */
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* ---------------------------------------------------- */
+/* CÁC THAY ĐỔI ĐỂ ĐÁP ỨNG YÊU CẦU MỚI:                */
+/* ---------------------------------------------------- */
+
+/* 1. Khi chat-bubble KHÔNG EXPANDED: */
+
+/* Đảm bảo #note-background không scale khi hover */
+#chat-bubble:not(.expanded) #note-background:hover {
+  transform: none;
+  /* Hủy bỏ mọi hiệu ứng scale */
+}
+
+/* Đảm bảo lớp phủ ::before KHÔNG BAO GIỜ HIỂN THỊ khi chưa expanded */
+#chat-bubble:not(.expanded) #note-background::before {
+  display: none;
+}
+
+/* Luôn hiển thị note.png và ẩn reload.png khi chat-bubble chưa expanded */
+#chat-bubble:not(.expanded) #note-default {
+  opacity: 1;
+  /* Luôn hiển thị note.png */
+}
+
+#chat-bubble:not(.expanded) #note-hover {
+  opacity: 0;
+  /* Luôn ẩn reload.png */
+}
+
+
+/* 2. Khi chat-bubble ĐÃ EXPANDED: */
+
+/* Kích hoạt lớp phủ ::before khi expanded */
+#chat-bubble.expanded #note-background::before {
+  display: block;
+  /* Hiển thị ::before khi expanded */
+}
+
+/* Luôn hiển thị note-default khi expanded và KHÔNG HOVER */
+#chat-bubble.expanded #note-default {
+  opacity: 1;
+  /* Mặc định note.png hiển thị */
+}
+
+/* Ẩn note-hover khi expanded và KHÔNG HOVER */
+#chat-bubble.expanded #note-hover {
+  opacity: 0;
+  /* Mặc định reload.png ẩn */
+}
+
+/* Khi hover #note-background VÀ chat-bubble ĐÃ EXPANDED: */
+#chat-bubble.expanded #note-background:hover #note-default {
+  opacity: 0;
+  /* Ẩn note.png */
+}
+
+#chat-bubble.expanded #note-background:hover #note-hover {
+  opacity: 1;
+  /* Hiện reload.png */
+}
+
+#stars,
+#stars2,
+#stars3 {
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  position: absolute;
+  --star-animation-height: 500px;
+  animation: animStar var(--animation-duration, 50s) linear infinite;
+}
+
+#stars:after,
+#stars2:after,
+#stars3:after {
+  content: " ";
+  position: absolute;
+  top: var(--star-animation-height);
+  width: inherit;
+  height: inherit;
+  background: transparent;
+  box-shadow: inherit;
+}
+
+#stars {
+  --animation-duration: 50s;
+}
+
+#stars2 {
+  width: 2px;
+  height: 2px;
+  --animation-duration: 100s;
+}
+
+#stars3 {
+  width: 3px;
+  height: 3px;
+  --animation-duration: 150s;
+}
+
+@keyframes animStar {
+  from {
+    transform: translateY(0px);
+  }
+
+  to {
+    transform: translateY(calc(-1 * var(--star-animation-height)));
+  }
+}
+
+.background-blur-chat {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(20px);
+  z-index: 8;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#chat-bubble.expanded+.background-blur-chat {
+  opacity: 1;
+  visibility: visible;
+}
+
+.background-blur-chat.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.chat-toolbar {
+  position: absolute;
+  width: 370px;
+  bottom: 0px;
+  right: 0px;
+  box-sizing: border-box;
+  gap: 10px;
+  z-index: 1;
+  backdrop-filter: blur(10px);
+  border-radius: 25px 25px 0px 0px;
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.plus-button {
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  background-color: transparent;
+  bottom: 15px;
+  left: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 25px;
+}
+
+.plus-button svg {
+  width: 30px;
+  height: 30px;
+}
+
+.chat-toolbar .send-button {
+  position: absolute;
+  background-color: transparent;
+  bottom: 15px;
+  right: 8px;
+  border: none;
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+  border-radius: 100%;
+  transition: all 0.3s ease;
+}
+
+.send-button svg {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+
+.text-area {
+  position: relative;
+  margin: 20px 0px;
+  width: 245px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 25px;
+  display: inline-block;
+  z-index: 0;
+}
+
+.chat-toolbar .text-area .text-input {
+  position: relative;
+  max-height: 400px;
+  width: 100%;
+  flex-grow: 1;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  border-radius: 25px;
+  padding: 9px 15px 10px 15px;
+  font-size: 16px;
+  resize: none;
+  overflow-y: auto;
+  line-height: 1.5;
+  box-sizing: border-box;
+  z-index: 1000000;
+}
+
+.chat-toolbar .text-area .text-input:focus {
+  outline: none;
+}
+
+.text-area:focus-within .text-gradient-1 {
+  opacity: 1;
+}
+
+.text-gradient-1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  filter: blur(10px);
+  border-radius: 25px;
+  background: linear-gradient(to left, #7cc6ff, #81ff9a, #fff895, #ffacb4, #df9bff, #7cc6ff, #81ff9a, #fff895, #ffacb4, #df9bff, #7cc6ff);
+  background-position: 100% 0%;
+  background-size: 200% 100%;
+  animation: gradientAnimation 1s linear infinite;
+  z-index: 0;
+  transition: all 0.5s ease;
+}
+
+.text-area:focus-within .text-gradient-2 {
+  opacity: 1;
+}
+
+.text-gradient-2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  border-radius: 25px;
+  background: linear-gradient(to left, #7cc6ff, #81ff9a, #fff895, #ffacb4, #df9bff, #7cc6ff, #81ff9a, #fff895, #ffacb4, #df9bff, #7cc6ff);
+  background-position: 100% 0%;
+  background-size: 200% 100%;
+  animation: gradientAnimation 1s linear infinite;
+  z-index: 0;
+  transition: all 0.5s ease;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 100% 0%;
+  }
+
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+#chat-bubble:not(.expanded) .chat-toolbar {
+  display: none;
+}
+
+.chat-content-area {
+  width: 370px;
+  height: 600px;
+  top: 0px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-bottom: 100px;
+  padding-top: 30px;
+  align-items: flex-end;
+  z-index: 0;
+}
+
+.message-box {
+  margin-right: 10px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  max-width: 350px;
+  width: fit-content;
+  min-height: 40px;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  flex-shrink: 0;
+  backdrop-filter: blur(10px);
+  animation: appear linear;
+  animation-timeline: view();
+  animation-range: 0% 15%;
+  position: relative;
+  align-self: flex-end;
+  z-index: 20;
+  transition: all 0.3s ease-out;
+  display: flex;
+  justify-content: center;
+  /* Căn giữa ngang */
+  align-items: center;
+}
+
+/* Styles cho tin nhắn văn bản */
+.message-box .message-content p {
+    margin: 5px 15px; /* Giữ margin của bạn */
+    font-size: 16px;
+    color: #333; /* Màu chữ cho tin nhắn văn bản, thường là đen hoặc xám đậm */
+    line-height: 1.5;
+    text-align: left;
+    white-space: pre-wrap; /* Giữ định dạng khoảng trắng và xuống dòng */
+}
+
+/* Styles cho ảnh trong message-box */
+.chat-image {
+    max-width: 350px;
+    /* Chiều rộng tối đa */
+    max-height: 200px;
+    /* Đảm bảo tỷ lệ khung hình được duy trì */
+    display: block;
+    /* Loại bỏ khoảng trắng thừa dưới ảnh */
+    border-radius: 15px;
+    /* Bo tròn góc cho ảnh */
+    object-fit: cover;
+    margin: 0px;
+}
+
+/* Styles cho video trong message-box */
+.chat-video {
+    max-height: 200px;
+    max-width: 350px;
+    display: block;
+    width: auto;
+    /* Loại bỏ khoảng trắng thừa dưới video */
+    border-radius: 15px;
+    /* Bo tròn góc cho video */
+    object-fit: cover;
+}
+/* Styles chung cho box chứa file (không phải ảnh/video/audio) */
+.chat-file {
+    display: flex;
+    align-items: center;
+    min-width: 200px;
+    max-width: 350px;
+    height: 80px; /* Chiều cao cố định cho box file */
+    padding: 10px 20px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    background-color: rgba(80, 80, 80, 0.3); /* Màu nền mặc định cho file box */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.message-box:has(.chat-file) {
+  background-color: transparent;
+}
+
+/* Styles cho phần thông tin file (icon, tên, kích thước) */
+.file-info {
+    display: flex;
+    align-items: center;
+    flex-grow: 1; /* Cho phép phần info chiếm đủ không gian */
+    height: 55px;
+}
+
+/* Styles cho tên file */
+.file-details .file-name {
+    font-size: 17px;
+    position: relative;
+    top: 0px;
+    color: #ffffff; /* Màu chữ trắng cho tên file */
+    font-weight: 500;
+    white-space: nowrap; /* Ngăn tên file xuống dòng */
+    overflow: hidden; /* Ẩn phần tràn */
+    text-overflow: ellipsis;
+}
+
+/* Styles cho kích thước file */
+.file-details .file-size {
+    font-size: 14px;
+    margin-top: 10px; /* Khoảng cách với tên file */
+    color: #dcdcdc; /* Màu chữ xám nhạt cho kích thước file */
+    display: block; /* Đảm bảo kích thước file nằm trên dòng mới */
+}
+
+/* Styles cho container icon file SVG */
+.file-avatar-container {
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-right: 13px;
+}
+
+.file-avatar-container svg {
+    width: 55px; /* Điều chỉnh kích thước icon bên trong container */
+    height: 55px;
+}
+
+.message-box:has(.chat-audio) {
+  border-radius: 25px;
+  background-color: transparent;
+}
+
+.chat-audio {
+    display: flex; /* Sử dụng flexbox để căn chỉnh các phần tử bên trong */
+    align-items: center;
+    width: 350px; /* Chiều rộng tối đa */
+    height: 130px; /* Chiều cao cố định cho audio box */
+    padding: 10px 15px;
+    box-sizing: border-box;
+    border-radius: 25px;
+    background-color: rgba(80, 80, 80, 0.3);
+  backdrop-filter: blur(10px);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chat-audio .file-avatar-container {
+  position: absolute;
+  top: 0px;
+  left: -70px;
+}
+
+.chat-audio .file-info {
+  position: absolute;
+  top: 15px;
+  left: 90px;
+}
+.chat-audio audio {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+    width: 94%; /* Chiều rộng cố định cho audio control */
+    height: 40px; /* Chiều cao của audio control */
+}
+
+/* Điều chỉnh lại chiều cao tổng thể của message-box khi nó chứa audio
+   Không cần điều chỉnh `message-box` dựa trên `.chat-audio` bằng :has()
+   vì `.chat-audio` đã là một phần tử có kích thước xác định
+*/
+/*
+.message-box:has(.chat-audio) {
+    width: 600px;
+    height: 100px;
+    border-radius: 30px;
+    background-color: rgba(80, 80, 80, 0.3);
+}
+*/
+
+/* Styles cho thông báo tạm thời */
+.temporary-notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    z-index: 1000;
+    font-size: 0.9em;
+}
+
+.temporary-notification.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+
+.interaction-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: white;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.2, 0.95, 0.4, 0.95);
+  overflow: hidden;
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.interaction-button img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.interaction-button.blue {
+  backdrop-filter: blur(200px);
+  background: #007bff;
+  right: 25px;
+  transform: translateY(-50%) translateX(10px);
+  transition: all 0.3s ease-out;
+}
+
+.interaction-button.red {
+  backdrop-filter: blur(200px);
+  background: rgb(255, 0, 0);
+  right: 70px;
+  transform: translateY(-50%) translateX(55px);
+}
+
+.interaction-button.active {
+  transform: translateY(-50%) translateX(0);
+  opacity: 1;
+}
+
+.interaction-button.hide {
+  transform: translateY(-50%) translateX(20px);
+  opacity: 0;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+
+
+
+
+
+#toolbar-loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 25px 25px 0px 0px;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(200px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-out;
+}
+
+#toolbar-loading-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+@keyframes waterfall {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-250%);
+    transform: translateY(-250%);
+  }
+
+  40%,
+  60% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(250%);
+    transform: translateY(250%);
+  }
+}
+
+.waterfall div {
+  -webkit-animation: waterfall 1.5s infinite;
+  animation: waterfall 1.5s infinite;
+  background-color: var(--primary);
+  height: 20px;
+  left: 50%;
+  margin-top: -10px;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  width: 20px;
+  border-radius: 50%;
+  box-shadow: 0 0 5px var(--primary),
+    0 0 25px var(--primary),
+    0 0 50px var(--primary);
+}
+
+.waterfall div:nth-of-type(5) {
+  -webkit-animation-delay: 1.25s;
+  animation-delay: 1.25s;
+  margin-left: -80px;
+}
+
+
+.waterfall div:nth-of-type(3) {
+  -webkit-animation-delay: 0.75s;
+  animation-delay: 0.75s;
+  margin-left: -45px;
+}
+
+.waterfall div:nth-of-type(1) {
+  -webkit-animation-delay: 0.25s;
+  animation-delay: 0.25s;
+  margin-left: -10px;
+}
+
+.waterfall div:nth-of-type(2) {
+  -webkit-animation-delay: 0.5s;
+  animation-delay: 0.5s;
+  margin-left: 25px;
+}
+
+.waterfall div:nth-of-type(4) {
+  -webkit-animation-delay: 1s;
+  animation-delay: 1s;
+  margin-left: 60px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Import font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+/* Reset cho loader (để không ảnh hưởng đến body chính của trang) */
+.loader * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Styles cho lớp phủ loading mới */
+.loading-overlay {
+  position: absolute;
+  /* Quan trọng để bao phủ chat-bubble */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(10px);
+  /* Làm mờ nền */
+  background-color: rgba(0, 0, 0, 0.8);
+  /* Nền tối mờ */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  /* Đảm bảo nó nằm trên tất cả các nội dung khác trong chat-bubble */
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease
+    /* Kế thừa border-radius từ parent #chat-bubble */
+}
+
+#chat-bubble:not(.expanded) .loading-overlay.active {
+  opacity: 0;
+  /* Giữ opacity 0 ngay cả khi active nếu bubble chưa mở */
+  visibility: hidden;
+  /* Đảm bảo ẩn hoàn toàn */
+}
+
+/* Khi loading-overlay có active class và chat-bubble ĐÃ EXPANDED */
+#chat-bubble.expanded .loading-overlay.active {
+  opacity: 1;
+  /* Hiện loading overlay với opacity 1 */
+  visibility: visible;
+  /* Hiện loading overlay */
+}
+
+.loading-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Styles cho text loader */
+.loader {
+  position: relative;
+  cursor: default;
+  -webkit-box-reflect: below -25px linear-gradient(transparent, #0005);
+}
+
+.loader span {
+  position: relative;
+  display: inline-flex;
+  /* Đảm bảo hiển thị inline nhưng vẫn có thể dùng transform */
+  font-size: 2.5em;
+  /* Có thể điều chỉnh kích thước chữ nếu cần */
+  color: transparent;
+  -webkit-text-stroke: 1px #fff9;
+  text-transform: uppercase;
+  font-weight: 800;
+  animation: animate 2s ease-in-out infinite;
+  animation-delay: calc(0.15s * var(--i));
+}
+
+@keyframes animate {
+  0% {
+    transform: translateY(0px);
+    color: transparent;
+    text-shadow: none;
+  }
+
+  20% {
+    transform: translateY(-60px);
+    color: #fff;
+    text-shadow: 0 0 5px #fff,
+      0 0 25px #fff,
+      0 0 50px #fff;
+  }
+
+  40%,
+  100% {
+    transform: translateY(0px);
+    color: transparent;
+    text-shadow: none;
+  }
+}
+
+
+
+.scroll-to-bottom-btn {
+  position: absolute;
+  top: 460px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.1);
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-out;
+  backdrop-filter: blur(10px);
+}
+
+.scroll-to-bottom-btn svg {
+  transform: translateX(-0.5px);
+}
+
+.scroll-to-bottom-btn.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.scroll-to-bottom-btn svg {
+  transition: transform 0.2s ease;
+}
+
+.scroll-to-bottom-btn:hover svg {
+  transform: translateY(2px);
+}
+
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.glow-point {
+  position: absolute;
+  box-shadow: 0rem 0rem 1.2rem 0.6rem rgb(0, 172, 255);
+  pointer-events: none;
+  z-index: 3000000;
+}
+
+.starMouse {
+  position: absolute;
+  z-index: 200000000000;
+  color: white;
+  font-size: 1rem;
+  animation-duration: 1500ms;
+  animation-fill-mode: forwards;
+  pointer-events: none;
+}
+
+@keyframes fall-1 {
+  0% {
+    transform: translate(0px, 0px) rotateX(45deg) rotateY(30deg) rotateZ(0deg) scale(0.25);
+    opacity: 0;
+  }
+  
+  5% {
+    transform: translate(10px, -10px) rotateX(45deg) rotateY(30deg) rotateZ(0deg) scale(1);
+    opacity: 1;
+  }
+  
+  100% {
+    transform: translate(25px, 200px) rotateX(180deg) rotateY(270deg) rotateZ(90deg) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes fall-2 {
+  0% {
+    transform: translate(0px, 0px) rotateX(-20deg) rotateY(10deg) scale(0.25);
+    opacity: 0;
+  }
+  
+  10% {
+    transform: translate(-10px, -5px) rotateX(-20deg) rotateY(10deg) scale(1);
+    opacity: 1;
+  }
+  
+  100% {
+    transform: translate(-10px, 160px) rotateX(-90deg) rotateY(45deg) scale(0.25);
+    opacity: 0;
+  }
+}
+
+@keyframes fall-3 {
+  0% {
+    transform: translate(0px, 0px) rotateX(0deg) rotateY(45deg) scale(0.5);
+    opacity: 0;
+  }
+  
+  15% {
+    transform: translate(7px, 5px) rotateX(0deg) rotateY(45deg) scale(1);
+    opacity: 1;
+  }
+  
+  100% {
+    transform: translate(20px, 120px) rotateX(-180deg) rotateY(-90deg) scale(0.5);
+    opacity: 0;
+  }
+}
