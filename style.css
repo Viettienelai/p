@@ -24,7 +24,7 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 1500px;
+  height: 1200px;
   font-family: 'Rubik', sans-serif;
   font-weight: 400;
   z-index: 0;
@@ -58,7 +58,7 @@ body {
 
 #bookmark-container {
   position: absolute;
-  top: 280px;
+  top: 250px;
   width: 390px;
   gap: 20px;
   left: 50%;
@@ -97,7 +97,6 @@ body {
 .container .bookmark-item a {
   width: 85px;
   height: 85px;
-  transition: background-color 0.1s ease, transform 0.3s ease;
   padding-top: 7px;
   border-radius: 15px;
 }
@@ -128,7 +127,7 @@ body {
   position: relative;
   display: flex;
   justify-content: center;
-  top: 190px;
+  top: 170px;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
@@ -256,7 +255,7 @@ body {
   position: absolute;
   top: 0px;
   left: 50%;
-  transform: translateX(-83.5%);
+  transform: translateX(-83.3%);
   width: 650px;
   height: 200px;
   z-index: 4;
@@ -270,7 +269,6 @@ body {
   top: 0;
   left: 0;
   z-index: 14;
-  transition: all 0.3s ease;
   border-radius: 20px;
 }
 
@@ -500,7 +498,6 @@ body {
   border-radius: 100px;
   background: radial-gradient(ellipse at bottom, #6d97c6 0%, #dfdfc2 100%);
   box-sizing: border-box;
-  transition: all 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940);
   pointer-events: auto;
   z-index: 10000;
   overflow: hidden;
@@ -529,8 +526,6 @@ body {
   z-index: 9;
   /* Đặt dưới chat-bubble nhưng trên background-blur-chat */
   opacity: 0;
-  transition: all 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940);
-  /* Thêm transition cho opacity */
 }
 
 .chat-bubble-border-effect::before,
@@ -648,8 +643,6 @@ body {
   height: 30px;
   z-index: 2;
   opacity: 0;
-  /* Mặc định ẩn tất cả các icon */
-  transition: opacity 0.3s ease-in-out;
 }
 
 /* ---------------------------------------------------- */
@@ -772,7 +765,6 @@ body {
   z-index: 8;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 #chat-bubble.expanded+.background-blur-chat {
@@ -796,7 +788,6 @@ body {
   backdrop-filter: blur(10px);
   border-radius: 25px 25px 0px 0px;
   background: rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
 }
 
 .plus-button {
@@ -808,7 +799,6 @@ body {
   left: 8px;
   border: none;
   cursor: pointer;
-  transition: all 0.3s ease;
   border-radius: 25px;
 }
 
@@ -827,7 +817,6 @@ body {
   width: 50px;
   cursor: pointer;
   border-radius: 100%;
-  transition: all 0.3s ease;
 }
 
 .send-button svg {
@@ -886,7 +875,6 @@ body {
   background-size: 200% 100%;
   animation: gradientAnimation 1s linear infinite;
   z-index: 0;
-  transition: all 0.5s ease;
 }
 
 .text-area:focus-within .text-gradient-2 {
@@ -906,7 +894,6 @@ body {
   background-size: 200% 100%;
   animation: gradientAnimation 1s linear infinite;
   z-index: 0;
-  transition: all 0.5s ease;
 }
 
 @keyframes gradientAnimation {
@@ -958,7 +945,6 @@ body {
   position: relative;
   align-self: flex-end;
   z-index: 20;
-  transition: all 0.3s ease-out;
   display: flex;
   justify-content: center;
   /* Căn giữa ngang */
@@ -1010,8 +996,7 @@ body {
     padding: 10px 20px;
     box-sizing: border-box;
     border-radius: 20px;
-    background-color: rgba(80, 80, 80, 0.3); /* Màu nền mặc định cho file box */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: rgba(80, 80, 80, 0.3);
 }
 
 .message-box:has(.chat-file) {
@@ -1077,7 +1062,6 @@ body {
     border-radius: 25px;
     background-color: rgba(80, 80, 80, 0.3);
   backdrop-filter: blur(10px);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .chat-audio .file-avatar-container {
@@ -1124,7 +1108,6 @@ body {
     padding: 10px 20px;
     border-radius: 5px;
     opacity: 0;
-    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
     z-index: 1000;
     font-size: 0.9em;
 }
@@ -1148,7 +1131,6 @@ body {
   cursor: pointer;
   color: white;
   opacity: 0;
-  transition: all 0.3s cubic-bezier(0.2, 0.95, 0.4, 0.95);
   overflow: hidden;
   box-shadow: 0 0px 10px rgba(0, 0, 0, 0.5);
 }
@@ -1164,7 +1146,6 @@ body {
   background: #007bff;
   right: 25px;
   transform: translateY(-50%) translateX(10px);
-  transition: all 0.3s ease-out;
 }
 
 .interaction-button.red {
@@ -1215,7 +1196,6 @@ body {
   z-index: 10;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s ease-out;
 }
 
 #toolbar-loading-overlay.active {
@@ -1337,8 +1317,6 @@ body {
   /* Đảm bảo nó nằm trên tất cả các nội dung khác trong chat-bubble */
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s ease
-    /* Kế thừa border-radius từ parent #chat-bubble */
 }
 
 #chat-bubble:not(.expanded) .loading-overlay.active {
