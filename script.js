@@ -159,7 +159,7 @@ function updateDigit(prefix, digit) {
         const element = document.getElementById(`${prefix}-${segment}`);
         if (element) {
             if (activeSegments.includes(segment)) {
-                element.style.fill = 'rgb(82, 82, 82)';
+                element.style.fill = 'rgb(255, 247, 0)';
                 element.style.transition = 'fill 0.3s ease';
             } else {
                 element.style.fill = 'rgba(0, 0, 0, 0.1)';

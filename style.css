@@ -31,6 +31,14 @@ body {
   overflow: hidden;
 }
 
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  z-index: 1;
+}
+
 .scroll-element {
   position: absolute;
   top: 0;
@@ -58,6 +66,8 @@ body {
   padding: 10px 15px 10px 15px;
   box-sizing: border-box;
   border-radius: var(--border-radius);
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -136,7 +146,8 @@ body {
   top: 10px;
   left: 10px;
   border: none;
-  background: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
   box-sizing: border-box;
   box-shadow: 0 0px 12px rgba(0, 0, 0, 0.8);
   font-size: 16px;
@@ -236,6 +247,8 @@ body {
   top: 0px;
   left: 50%;
   transform: translateX(-83.3%);
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
   width: 650px;
   height: 200px;
   z-index: 4;
@@ -268,7 +281,7 @@ body {
 #sep3 {
   top: 76px;
   left: 415px;
-  background-color: rgb(100, 100, 100);
+  background-color: rgb(255, 255, 255);
   width: 15px;
   height: 15px;
   position: absolute;
@@ -282,7 +295,7 @@ body {
 #sep4 {
   top: 116px;
   left: 415px;
-  background-color: rgb(100, 100, 100);
+  background-color: rgb(255, 255, 255);
   width: 15px;
   height: 15px;
   position: absolute;
@@ -513,7 +526,7 @@ body {
   width: 70px;
   height: 70px;
   border-bottom-right-radius: 100%;
-  background: rgb(255, 255, 255);
+  background: rgba(255, 255, 255, 0.6);
   position: relative;
   cursor: pointer;
   z-index: 2;
