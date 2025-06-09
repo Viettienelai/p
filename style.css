@@ -31,22 +31,6 @@ body {
   overflow: hidden;
 }
 
-.background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 0;
-  overflow: hidden;
-}
-
-.background img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .scroll-element {
   position: absolute;
   top: 0;
@@ -71,8 +55,6 @@ body {
 
 .container {
   width: 370px;
-  backdrop-filter: var(--blur);
-  background: var(--bg);
   padding: 10px 15px 10px 15px;
   box-sizing: border-box;
   border-radius: var(--border-radius);
@@ -81,7 +63,6 @@ body {
   flex-wrap: wrap;
   z-index: 2;
   box-shadow: var(--shadow);
-  animation: bookmark-container 1s cubic-bezier(0.175, 0.885, 0.32, 2) forwards;
 }
 
 .bookmark-item {
@@ -155,7 +136,6 @@ body {
   top: 10px;
   left: 10px;
   border: none;
-  backdrop-filter: blur(20px);
   background: rgba(255, 255, 255, 0.7);
   box-sizing: border-box;
   box-shadow: 0 0px 12px rgba(0, 0, 0, 0.8);
@@ -186,7 +166,7 @@ body {
   pointer-events: auto;
   top: 35px;
   left: 7%;
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(10px);
   box-shadow: 0 0px 10px rgba(0, 0, 0, 0.5);
   background: rgba(255, 255, 255, 0.5);
   list-style: none;
@@ -240,7 +220,7 @@ body {
   height: 1500%;
   backdrop-filter: blur(10px);
   opacity: 0;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.2);
   transition: opacity 0.3s ease;
   z-index: 10;
 }
@@ -281,21 +261,14 @@ body {
   box-sizing: border-box;
   z-index: 15;
   border-radius: 20px;
-  backdrop-filter: blur(10px);
-  background-color: rgba(91, 154, 165, 0.2);
   box-shadow: 0 0px 12px rgba(255, 255, 255, 0.5);
   border: 3px solid rgba(255, 255, 255, 0.1);
-}
-
-.block {
-  fill: #ffd500;
-  z-index: 16;
 }
 
 #sep3 {
   top: 76px;
   left: 415px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(100, 100, 100);
   width: 15px;
   height: 15px;
   position: absolute;
@@ -309,7 +282,7 @@ body {
 #sep4 {
   top: 116px;
   left: 415px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(100, 100, 100);
   width: 15px;
   height: 15px;
   position: absolute;
@@ -514,63 +487,6 @@ body {
   initial-value: 0deg;
 }
 
-.chat-bubble-border-effect {
-  position: absolute;
-  /* Kích thước ban đầu giống bubble thu gọn, sẽ thay đổi bằng JS */
-  width: 50px;
-  height: 50px;
-  right: 10px;
-  top: 10px;
-  border-radius: 100px;
-  /* Ban đầu là hình tròn */
-  z-index: 9;
-  /* Đặt dưới chat-bubble nhưng trên background-blur-chat */
-  opacity: 0;
-}
-
-.chat-bubble-border-effect::before,
-.chat-bubble-border-effect::after {
-  content: "";
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background: conic-gradient(from var(--deg) at center,
-      #00c3ff,
-      #b3a1ff,
-      #fd8eff,
-      #ff7171,
-      #fec319,
-      #77ff99,
-      #00c3ff);
-  border-radius: inherit;
-  animation: autoRotate 4s linear infinite;
-  /* Animation xoay */
-}
-
-.chat-bubble-border-effect::after {
-  filter: blur(20px);
-  /* Hiệu ứng mờ cho lớp sau */
-}
-
-@keyframes autoRotate {
-  to {
-    --deg: 360deg;
-    /* Thay đổi giá trị của --deg để xoay */
-  }
-}
-
-/* Khi chat-bubble.expanded, điều chỉnh border-effect theo */
-#chat-bubble.expanded+.chat-bubble-border-effect {
-  width: 380px;
-  height: 610px;
-  top: -85px;
-  right: -4px;
-  border-radius: 25px;
-  /* Hình vuông/chữ nhật với góc bo */
-  opacity: 1;
-  /* Hiển thị khi expanded */
-}
-
 #chat-bubble.expanded {
   width: 370px;
   height: 600px;
@@ -597,17 +513,12 @@ body {
   width: 70px;
   height: 70px;
   border-bottom-right-radius: 100%;
-  backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.6);
+  background: rgb(255, 255, 255);
   position: relative;
   cursor: pointer;
   z-index: 2;
-  /* Bỏ transition transform ở đây nếu bạn không muốn scale khi không expanded */
-  /* transition: transform 0.3s ease-out; */
 }
 
-/* Pseudo-element cho hiệu ứng hover - TRẠNG THÁI EXPANDED */
-/* Đây là trạng thái mặc định của ::before, sẽ được áp dụng chỉ khi .expanded */
 #note-background::before {
   content: '';
   position: absolute;
@@ -680,6 +591,11 @@ body {
 #chat-bubble.expanded #note-background::before {
   display: block;
   /* Hiển thị ::before khi expanded */
+}
+
+#chat-bubble.expanded #note-background {
+  
+  background: rgba(255, 255, 255, 0.6);
 }
 
 /* Luôn hiển thị note-default khi expanded và KHÔNG HOVER */
@@ -760,8 +676,7 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(20px);
+  background-color: rgba(0, 0, 0, 0.7);
   z-index: 8;
   opacity: 0;
   visibility: hidden;
@@ -785,9 +700,8 @@ body {
   box-sizing: border-box;
   gap: 10px;
   z-index: 1;
-  backdrop-filter: blur(10px);
   border-radius: 25px 25px 0px 0px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .plus-button {
@@ -861,51 +775,6 @@ body {
   opacity: 1;
 }
 
-.text-gradient-1 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  filter: blur(10px);
-  border-radius: 25px;
-  background: linear-gradient(to left, #7cc6ff, #81ff9a, #fff895, #ffacb4, #df9bff, #7cc6ff, #81ff9a, #fff895, #ffacb4, #df9bff, #7cc6ff);
-  background-position: 100% 0%;
-  background-size: 200% 100%;
-  animation: gradientAnimation 1s linear infinite;
-  z-index: 0;
-}
-
-.text-area:focus-within .text-gradient-2 {
-  opacity: 1;
-}
-
-.text-gradient-2 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  border-radius: 25px;
-  background: linear-gradient(to left, #7cc6ff, #81ff9a, #fff895, #ffacb4, #df9bff, #7cc6ff, #81ff9a, #fff895, #ffacb4, #df9bff, #7cc6ff);
-  background-position: 100% 0%;
-  background-size: 200% 100%;
-  animation: gradientAnimation 1s linear infinite;
-  z-index: 0;
-}
-
-@keyframes gradientAnimation {
-  0% {
-    background-position: 100% 0%;
-  }
-
-  100% {
-    background-position: 0% 0%;
-  }
-}
-
 #chat-bubble:not(.expanded) .chat-toolbar {
   display: none;
 }
@@ -938,10 +807,6 @@ body {
   box-sizing: border-box;
   word-wrap: break-word;
   flex-shrink: 0;
-  backdrop-filter: blur(10px);
-  animation: appear linear;
-  animation-timeline: view();
-  animation-range: 0% 15%;
   position: relative;
   align-self: flex-end;
   z-index: 20;
@@ -1084,20 +949,6 @@ body {
     height: 40px; /* Chiều cao của audio control */
 }
 
-/* Điều chỉnh lại chiều cao tổng thể của message-box khi nó chứa audio
-   Không cần điều chỉnh `message-box` dựa trên `.chat-audio` bằng :has()
-   vì `.chat-audio` đã là một phần tử có kích thước xác định
-*/
-/*
-.message-box:has(.chat-audio) {
-    width: 600px;
-    height: 100px;
-    border-radius: 30px;
-    background-color: rgba(80, 80, 80, 0.3);
-}
-*/
-
-/* Styles cho thông báo tạm thời */
 .temporary-notification {
     position: fixed;
     bottom: 20px;
@@ -1165,15 +1016,6 @@ body {
   opacity: 0;
 }
 
-@keyframes appear {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
 
 
 
@@ -1189,7 +1031,6 @@ body {
   height: 100%;
   border-radius: 25px 25px 0px 0px;
   background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(200px);
   display: flex;
   justify-content: center;
   align-items: center;
