@@ -621,55 +621,6 @@ body {
   /* Hiện reload.png */
 }
 
-#stars,
-#stars2,
-#stars3 {
-  width: 1px;
-  height: 1px;
-  background: transparent;
-  position: absolute;
-  --star-animation-height: 500px;
-  animation: animStar var(--animation-duration, 50s) linear infinite;
-}
-
-#stars:after,
-#stars2:after,
-#stars3:after {
-  content: " ";
-  position: absolute;
-  top: var(--star-animation-height);
-  width: inherit;
-  height: inherit;
-  background: transparent;
-  box-shadow: inherit;
-}
-
-#stars {
-  --animation-duration: 50s;
-}
-
-#stars2 {
-  width: 2px;
-  height: 2px;
-  --animation-duration: 100s;
-}
-
-#stars3 {
-  width: 3px;
-  height: 3px;
-  --animation-duration: 150s;
-}
-
-@keyframes animStar {
-  from {
-    transform: translateY(0px);
-  }
-
-  to {
-    transform: translateY(calc(-1 * var(--star-animation-height)));
-  }
-}
-
 .background-blur-chat {
   position: fixed;
   top: 0;
