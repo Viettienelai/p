@@ -4,7 +4,6 @@
   --padding: 17px 15px 0;
   --border-radius: 20px;
   --shadow: 0 0 12px rgba(0, 0, 0, 0.5);
-  --bookmark-animation: bounce 1s ease-in-out forwards;
 }
 
 * {
@@ -39,9 +38,12 @@ body {
 }
 
 .background img {
-  width: 100%; /* Ảnh sẽ chiếm 100% chiều rộng của .background */
-  height: 100%; /* Ảnh sẽ chiếm 100% chiều cao của .background */
-  object-fit: cover; /* Đảm bảo ảnh không bị méo và lấp đầy khung */
+  width: 100%;
+  /* Ảnh sẽ chiếm 100% chiều rộng của .background */
+  height: 100%;
+  /* Ảnh sẽ chiếm 100% chiều cao của .background */
+  object-fit: cover;
+  /* Đảm bảo ảnh không bị méo và lấp đầy khung */
 }
 
 .header {
@@ -50,12 +52,18 @@ body {
   left: 0;
   width: 100%;
   height: 160px;
-  border-radius: 0 0 25px 25px;
-  background-color: rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  border-radius: 0 0 24px 24px;
+  backdrop-filter: blur(5px);
+  background: rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 3px 8px 3px rgba(53, 53, 53, 0.25),
+    inset 0 2px 10px 5px rgba(255, 255, 255, 0.25),
+    inset 0 0 14px 0 rgba(255, 255, 255, 0.35),
+    inset 1px 3px 5px 0 rgba(255, 255, 255, 0.30),
+    inset -1px -3px 3px 0 rgba(255, 255, 255, 0.10);
   z-index: 2;
 }
+
 .scroll-element {
   position: absolute;
   top: 0;
@@ -82,10 +90,15 @@ body {
   width: 370px;
   padding: 10px 15px 10px 15px;
   box-sizing: border-box;
-  border-radius: var(--border-radius);
-  background-color: rgba(255, 255, 255, 0.5);
-  box-shadow: 0 0px 32px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  box-shadow:
+    0 3px 8px 3px rgba(53, 53, 53, 0.25),
+    inset 0 2px 10px 5px rgba(255, 255, 255, 0.25),
+    inset 0 0 14px 0 rgba(255, 255, 255, 0.35),
+    inset 1px 3px 5px 0 rgba(255, 255, 255, 0.30),
+    inset -1px -3px 3px 0 rgba(255, 255, 255, 0.10);
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -124,7 +137,7 @@ body {
   transform: translateX(-50%);
   margin-top: 7px;
   font-size: 11px;
-  color: #333;
+  color: #ffffff;
   position: absolute;
   white-space: nowrap;
   z-index: 5;
@@ -162,15 +175,25 @@ body {
   top: 10px;
   left: 10px;
   border: none;
-  background-color: rgba(255, 255, 255, 0.7);
-  box-shadow: 0 0px 32px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(5px);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 3px 8px 3px rgba(53, 53, 53, 0.25),
+    inset 0 2px 10px 5px rgba(255, 255, 255, 0.25),
+    inset 0 0 14px 0 rgba(255, 255, 255, 0.35),
+    inset 1px 3px 5px 0 rgba(255, 255, 255, 0.30),
+    inset -1px -3px 3px 0 rgba(255, 255, 255, 0.10);
   box-sizing: border-box;
   font-size: 16px;
   border-radius: 100px;
   position: relative;
   z-index: 11;
   padding-left: 16%;
+  outline-color: #FEC319;
+}
+
+#search-bar::placeholder {
+  color: #505050;
 }
 
 #search-icon {
@@ -182,6 +205,7 @@ body {
   height: 30px;
   cursor: pointer;
   z-index: 12;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 1)) drop-shadow(0 0 5px rgba(255, 255, 255, 1));
 }
 
 #search-options {
@@ -189,11 +213,16 @@ body {
   position: absolute;
   border-radius: 20px;
   pointer-events: auto;
-  top: 35px;
+  top: 55px;
   left: 7%;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.5);
-  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+  background: rgba(255, 255, 255, 0);
+  box-shadow:
+    0 3px 8px 3px rgba(53, 53, 53, 0.25),
+    inset 0 2px 10px 5px rgba(255, 255, 255, 0.25),
+    inset 0 0 14px 0 rgba(255, 255, 255, 0.35),
+    inset 1px 3px 5px 0 rgba(255, 255, 255, 0.30),
+    inset -1px -3px 3px 0 rgba(255, 255, 255, 0.10);
   list-style: none;
   width: 200px;
   pointer-events: none;
@@ -215,7 +244,7 @@ body {
   font-size: 16px;
   display: flex;
   align-items: center;
-  color: black;
+  color: white;
   text-decoration: none;
   opacity: 1;
   transform: scale(1);
@@ -261,7 +290,7 @@ body {
   width: 650px;
   height: 200px;
   z-index: 4;
-  scale: 0.6 0.7;
+  scale: 0.6 0.65;
 }
 
 #area {
@@ -469,16 +498,6 @@ body {
   z-index: 1000001;
 }
 
-.chat-bubble-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: inherit;
-  z-index: 0;
-}
-
 #note-background {
   position: absolute;
   top: 0;
@@ -562,7 +581,7 @@ body {
 }
 
 #chat-bubble.expanded #note-background {
-  
+
   background: rgba(255, 255, 255, 0.6);
 }
 
@@ -738,50 +757,55 @@ body {
 
 /* Styles cho tin nhắn văn bản */
 .message-box .message-content p {
-    margin: 5px 15px; /* Giữ margin của bạn */
-    font-size: 16px;
-    color: #333; /* Màu chữ cho tin nhắn văn bản, thường là đen hoặc xám đậm */
-    line-height: 1.5;
-    text-align: left;
-    white-space: pre-wrap; /* Giữ định dạng khoảng trắng và xuống dòng */
+  margin: 5px 15px;
+  /* Giữ margin của bạn */
+  font-size: 16px;
+  color: #333;
+  /* Màu chữ cho tin nhắn văn bản, thường là đen hoặc xám đậm */
+  line-height: 1.5;
+  text-align: left;
+  white-space: pre-wrap;
+  /* Giữ định dạng khoảng trắng và xuống dòng */
 }
 
 /* Styles cho ảnh trong message-box */
 .chat-image {
-    max-width: 350px;
-    /* Chiều rộng tối đa */
-    max-height: 200px;
-    /* Đảm bảo tỷ lệ khung hình được duy trì */
-    display: block;
-    /* Loại bỏ khoảng trắng thừa dưới ảnh */
-    border-radius: 15px;
-    /* Bo tròn góc cho ảnh */
-    object-fit: cover;
-    margin: 0px;
+  max-width: 350px;
+  /* Chiều rộng tối đa */
+  max-height: 200px;
+  /* Đảm bảo tỷ lệ khung hình được duy trì */
+  display: block;
+  /* Loại bỏ khoảng trắng thừa dưới ảnh */
+  border-radius: 15px;
+  /* Bo tròn góc cho ảnh */
+  object-fit: cover;
+  margin: 0px;
 }
 
 /* Styles cho video trong message-box */
 .chat-video {
-    max-height: 200px;
-    max-width: 350px;
-    display: block;
-    width: auto;
-    /* Loại bỏ khoảng trắng thừa dưới video */
-    border-radius: 15px;
-    /* Bo tròn góc cho video */
-    object-fit: cover;
+  max-height: 200px;
+  max-width: 350px;
+  display: block;
+  width: auto;
+  /* Loại bỏ khoảng trắng thừa dưới video */
+  border-radius: 15px;
+  /* Bo tròn góc cho video */
+  object-fit: cover;
 }
+
 /* Styles chung cho box chứa file (không phải ảnh/video/audio) */
 .chat-file {
-    display: flex;
-    align-items: center;
-    min-width: 200px;
-    max-width: 350px;
-    height: 80px; /* Chiều cao cố định cho box file */
-    padding: 10px 20px;
-    box-sizing: border-box;
-    border-radius: 20px;
-    background-color: rgba(80, 80, 80, 0.3);
+  display: flex;
+  align-items: center;
+  min-width: 200px;
+  max-width: 350px;
+  height: 80px;
+  /* Chiều cao cố định cho box file */
+  padding: 10px 20px;
+  box-sizing: border-box;
+  border-radius: 20px;
+  background-color: rgba(80, 80, 80, 0.3);
 }
 
 .message-box:has(.chat-file) {
@@ -790,46 +814,54 @@ body {
 
 /* Styles cho phần thông tin file (icon, tên, kích thước) */
 .file-info {
-    display: flex;
-    align-items: center;
-    flex-grow: 1; /* Cho phép phần info chiếm đủ không gian */
-    height: 55px;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  /* Cho phép phần info chiếm đủ không gian */
+  height: 55px;
 }
 
 /* Styles cho tên file */
 .file-details .file-name {
-    font-size: 17px;
-    position: relative;
-    top: 0px;
-    color: #ffffff; /* Màu chữ trắng cho tên file */
-    font-weight: 500;
-    white-space: nowrap; /* Ngăn tên file xuống dòng */
-    overflow: hidden; /* Ẩn phần tràn */
-    text-overflow: ellipsis;
+  font-size: 17px;
+  position: relative;
+  top: 0px;
+  color: #ffffff;
+  /* Màu chữ trắng cho tên file */
+  font-weight: 500;
+  white-space: nowrap;
+  /* Ngăn tên file xuống dòng */
+  overflow: hidden;
+  /* Ẩn phần tràn */
+  text-overflow: ellipsis;
 }
 
 /* Styles cho kích thước file */
 .file-details .file-size {
-    font-size: 14px;
-    margin-top: 10px; /* Khoảng cách với tên file */
-    color: #dcdcdc; /* Màu chữ xám nhạt cho kích thước file */
-    display: block; /* Đảm bảo kích thước file nằm trên dòng mới */
+  font-size: 14px;
+  margin-top: 10px;
+  /* Khoảng cách với tên file */
+  color: #dcdcdc;
+  /* Màu chữ xám nhạt cho kích thước file */
+  display: block;
+  /* Đảm bảo kích thước file nằm trên dòng mới */
 }
 
 /* Styles cho container icon file SVG */
 .file-avatar-container {
-    width: 55px;
-    height: 55px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-right: 13px;
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-right: 13px;
 }
 
 .file-avatar-container svg {
-    width: 55px; /* Điều chỉnh kích thước icon bên trong container */
-    height: 55px;
+  width: 55px;
+  /* Điều chỉnh kích thước icon bên trong container */
+  height: 55px;
 }
 
 .message-box:has(.chat-audio) {
@@ -838,14 +870,17 @@ body {
 }
 
 .chat-audio {
-    display: flex; /* Sử dụng flexbox để căn chỉnh các phần tử bên trong */
-    align-items: center;
-    width: 350px; /* Chiều rộng tối đa */
-    height: 130px; /* Chiều cao cố định cho audio box */
-    padding: 10px 15px;
-    box-sizing: border-box;
-    border-radius: 25px;
-    background-color: rgba(80, 80, 80, 0.3);
+  display: flex;
+  /* Sử dụng flexbox để căn chỉnh các phần tử bên trong */
+  align-items: center;
+  width: 350px;
+  /* Chiều rộng tối đa */
+  height: 130px;
+  /* Chiều cao cố định cho audio box */
+  padding: 10px 15px;
+  box-sizing: border-box;
+  border-radius: 25px;
+  background-color: rgba(80, 80, 80, 0.3);
   backdrop-filter: blur(10px);
 }
 
@@ -860,32 +895,35 @@ body {
   top: 15px;
   left: 90px;
 }
+
 .chat-audio audio {
   position: absolute;
   top: 80px;
   left: 50%;
   transform: translateX(-50%);
-    width: 94%; /* Chiều rộng cố định cho audio control */
-    height: 40px; /* Chiều cao của audio control */
+  width: 94%;
+  /* Chiều rộng cố định cho audio control */
+  height: 40px;
+  /* Chiều cao của audio control */
 }
 
 .temporary-notification {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%) translateY(100%);
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    opacity: 0;
-    z-index: 1000;
-    font-size: 0.9em;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  opacity: 0;
+  z-index: 1000;
+  font-size: 0.9em;
 }
 
 .temporary-notification.show {
-    transform: translateX(-50%) translateY(0);
-    opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
 }
 
 
@@ -1177,5 +1215,5 @@ body {
 }
 
 body.no-scroll {
-    overflow: hidden;
+  overflow: hidden;
 }
