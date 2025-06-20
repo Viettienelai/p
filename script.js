@@ -1,54 +1,134 @@
-const searchIcon = document.getElementById('search-icon');
+const searchIconContainer = document.getElementById('search-icon');
 const searchOptions = document.getElementById('search-options');
 const searchForm = document.getElementById('search-form');
 const searchBar = document.getElementById('search-bar');
-const blur = document.getElementById('background-blur');
+const blurElement = document.getElementById('background-blur-search-options');
 const searchLinks = searchOptions.querySelectorAll('a');
 
-// Placeholder mặc định theo công cụ tìm kiếm
-const placeholders = {
-    "https://www.google.com/search": "Search on Google . . .",
-    "https://paulgo.io/search": "Search on SearXNG . . .",
-    "https://search.brave.com/search": "Search on Brave . . .",
-    "https://www.bing.com/search": "Search on Bing . . .",
-    "https://duckduckgo.com/": "Search on DuckDuckGo . . ."
+// Dữ liệu cho từng công cụ tìm kiếm, bao gồm placeholder, màu outline, HTML của SVG và viewBox
+const engineData = {
+    "https://www.google.com/search": {
+        placeholder: "Search on Google . . .",
+        outlineColor: "#FEC319",
+        viewBox: "1 1 23 23", // Thêm viewBox cho Google
+        svgHtml: `
+            <path d="M23 12.245c0-.905-.075-1.565-.236-2.25h-10.54v4.083h6.186c-.124 1.014-.797 2.542-2.294 3.569l-.021.136 3.332 2.53.23.022C21.779 18.417 23 15.593 23 12.245" fill="#4285F4" />
+            <path d="M12.225 23c3.03 0 5.574-.978 7.433-2.665l-3.542-2.688c-.948.648-2.22 1.1-3.891 1.1a6.745 6.745 0 0 1-6.386-4.572l-.132.011-3.465 2.628-.045.124C4.043 20.531 7.835 23 12.225 23" fill="#34A853" />
+            <path d="M5.84 14.175A6.7 6.7 0 0 1 5.463 12c0-.758.138-1.491.361-2.175l-.006-.147-3.508-2.67-.115.054A10.8 10.8 0 0 0 1 12c0 1.772.436 3.447 1.197 4.938z" fill="#FBBC05" />
+            <path d="M12.225 5.253c2.108 0 3.529.892 4.34 1.638l3.167-3.031C17.787 2.088 15.255 1 12.225 1 7.834 1 4.043 3.469 2.197 7.062l3.63 2.763a6.77 6.77 0 0 1 6.398-4.572" fill="#EB4335" />
+        `
+    },
+    "https://paulgo.io/search": {
+        placeholder: "Search on SearXNG . . .",
+        outlineColor: "blue",
+        viewBox: "0 0 92 92", // Thêm viewBox cho SearXNG
+        svgHtml: `
+            <g fill="none" stroke="#3050ff" transform="translate(-40.921 -17.417)">
+                <circle cx="75.921" cy="53.903" r="30" stroke-width="10" />
+                <path d="M67.515 37.915a18 18 0 0 1 21.051 3.313 18 18 0 0 1 3.138 21.078" stroke-width="5" />
+            </g>
+            <path d="m49.813 64.357 13.036-13.61 28.86 27.642-13.035 13.61z" fill="#3050ff" />
+        `
+    },
+    "https://search.brave.com/search": {
+        placeholder: "Search on Brave . . .",
+        outlineColor: "#FF2F00",
+        viewBox: "0 0 56 64", // Thêm viewBox cho Brave
+        svgHtml: `
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M53.292 15.321l1.5-3.676s-1.909-2.043-4.227-4.358c-2.317-2.315-7.225-.953-7.225-.953L37.751 0H18.12l-5.589 6.334s-4.908-1.362-7.225.953C2.988 9.602 1.08 11.645 1.08 11.645l1.5 3.676-1.91 5.447s5.614 21.236 6.272 23.83c1.295 5.106 2.181 7.08 5.862 9.668 3.68 2.587 10.36 7.08 11.45 7.762 1.091.68 2.455 1.84 3.682 1.84 1.227 0 2.59-1.16 3.68-1.84 1.091-.681 7.77-5.175 11.452-7.762 3.68-2.587 4.567-4.562 5.862-9.668.657-2.594 6.27-23.83 6.27-23.83l-1.908-5.447z" fill="url(#paint0_linear)" />
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M34.888 11.508c.818 0 6.885-1.157 6.885-1.157s7.189 8.68 7.189 10.536c0 1.534-.619 2.134-1.347 2.842-.152.148-.31.3-.467.468l-5.39 5.717a9.42 9.42 0 01-.176.18c-.538.54-1.33 1.336-.772 2.658l.115.269c.613 1.432 1.37 3.2.407 4.99-1.025 1.906-2.78 3.178-3.905 2.967-1.124-.21-3.766-1.589-4.737-2.218-.971-.63-4.05-3.166-4.05-4.137 0-.809 2.214-2.155 3.29-2.81.214-.13.383-.232.48-.298.111-.075.297-.19.526-.332.981-.61 2.754-1.71 2.799-2.197.055-.602.034-.778-.758-2.264-.168-.316-.365-.654-.568-1.004-.754-1.295-1.598-2.745-1.41-3.784.21-1.173 2.05-1.845 3.608-2.415.194-.07.385-.14.567-.209l1.623-.609c1.556-.582 3.284-1.229 3.57-1.36.394-.181.292-.355-.903-.468a54.655 54.655 0 01-.58-.06c-1.48-.157-4.209-.446-5.535-.077-.261.073-.553.152-.86.235-1.49.403-3.317.897-3.493 1.182-.03.05-.06.093-.089.133-.168.238-.277.394-.091 1.406.055.302.169.895.31 1.629.41 2.148 1.053 5.498 1.134 6.25.011.106.024.207.036.305.103.84.171 1.399-.805 1.622l-.255.058c-1.102.252-2.717.623-3.3.623-.584 0-2.2-.37-3.302-.623l-.254-.058c-.976-.223-.907-.782-.804-1.622.012-.098.024-.2.035-.305.081-.753.725-4.112 1.137-6.259.14-.73.253-1.32.308-1.62.185-1.012.076-1.168-.092-1.406a3.743 3.743 0 01-.09-.133c-.174-.285-2-.779-3.491-1.182-.307-.083-.6-.162-.86-.235-1.327-.37-4.055-.08-5.535.077-.226.024-.422.045-.58.06-1.196.113-1.297.287-.903.468.285.131 2.013.778 3.568 1.36.597.223 1.17.437 1.624.609.183.069.373.138.568.21 1.558.57 3.398 1.241 3.608 2.414.187 1.039-.657 2.489-1.41 3.784-.204.35-.4.688-.569 1.004-.791 1.486-.812 1.662-.757 2.264.044.488 1.816 1.587 2.798 2.197.229.142.415.257.526.332.098.066.266.168.48.298 1.076.654 3.29 2 3.29 2.81 0 .97-3.078 3.507-4.05 4.137-.97.63-3.612 2.008-4.737 2.218-1.124.21-2.88-1.061-3.904-2.966-.963-1.791-.207-3.559.406-4.99l.115-.27c.559-1.322-.233-2.118-.772-2.658a9.377 9.377 0 01-.175-.18l-5.39-5.717c-.158-.167-.316-.32-.468-.468-.728-.707-1.346-1.308-1.346-2.842 0-1.855 7.189-10.536 7.189-10.536s6.066 1.157 6.884 1.157c.653 0 1.913-.433 3.227-.885.333-.114.669-.23 1-.34 1.635-.545 2.726-.549 2.726-.549s1.09.004 2.726.549c.33.11.667.226 1 .34 1.313.452 2.574.885 3.226.885zm-1.041 30.706c1.282.66 2.192 1.128 2.536 1.343.445.278.174.803-.232 1.09-.405.285-5.853 4.499-6.381 4.965l-.215.191c-.509.459-1.159 1.044-1.62 1.044-.46 0-1.11-.586-1.62-1.044l-.213-.191c-.53-.466-5.977-4.68-6.382-4.966-.405-.286-.677-.81-.232-1.09.344-.214 1.255-.683 2.539-1.344l1.22-.629c1.92-.992 4.315-1.837 4.689-1.837.373 0 2.767.844 4.689 1.837.436.226.845.437 1.222.63z" fill="#fff" />
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M43.34 6.334L37.751 0H18.12l-5.589 6.334s-4.908-1.362-7.225.953c0 0 6.544-.59 8.793 3.064 0 0 6.066 1.157 6.884 1.157.818 0 2.59-.68 4.226-1.225 1.636-.545 2.727-.549 2.727-.549s1.09.004 2.726.549 3.408 1.225 4.226 1.225c.818 0 6.885-1.157 6.885-1.157 2.249-3.654 8.792-3.064 8.792-3.064-2.317-2.315-7.225-.953-7.225-.953z" fill="url(#paint1_linear)" />
+            <defs>
+                <linearGradient id="paint0_linear" x1=".671" y1="64.319" x2="55.2" y2="64.319" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#F50" />
+                    <stop offset=".41" stop-color="#F50" />
+                    <stop offset=".582" stop-color="#FF2000" />
+                    <stop offset="1" stop-color="#FF2000" />
+                </linearGradient>
+                <linearGradient id="paint1_linear" x1="6.278" y1="11.466" x2="50.565" y2="11.466" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#FF452A" />
+                    <stop offset="1" stop-color="#FF2000" />
+                </linearGradient>
+            </defs>
+        `
+    },
+    "https://www.bing.com/search": {
+        placeholder: "Search on Bing . . .",
+        outlineColor: "#5083DF",
+        viewBox: "0 2 42 42", // Thêm viewBox cho Bing
+        svgHtml: `
+            <linearGradient id="bing-a" gradientUnits="userSpaceOnUse" x1="11.905" y1="1.952" x2="17.941" y2="40.401">
+                <stop offset="0" style="stop-color:#3dbffc"/>
+                <stop offset="1" style="stop-color:#183efb"/>
+             </linearGradient>
+            <path style="fill:url(#bing-a)" d="M17.572 37.076 20 35.619V10.603a5 5 0 0 0-2.133-4.096L12.36 2.652c-.994-.696-2.36.015-2.36 1.229V32.5c0 .22.02.555.033.772.336 3.595 4.349 5.718 7.539 3.804"/>
+            <linearGradient id="bing-b" gradientUnits="userSpaceOnUse" x1="14.342" y1="41.478" x2="34.121" y2="25.575">
+                <stop offset="0" style="stop-color:#33bef0"/>
+                <stop offset=".159" style="stop-color:#32b9f0"/>
+                <stop offset=".341" style="stop-color:#2facf2"/>
+                <stop offset=".533" style="stop-color:#2a95f4"/>
+                <stop offset=".733" style="stop-color:#2475f6"/>
+                <stop offset=".936" style="stop-color:#1b4cfa"/>
+                <stop offset="1" style="stop-color:#183efb"/>
+            </linearGradient>
+            <path style="fill:url(#bing-b)" d="M32.682 27.904 20 35.5l-2.428 1.457c-3.191 1.915-7.203-.209-7.54-3.804C10.372 38.922 15.145 43.5 21 43.5c1.963 0 3.888-.536 5.568-1.551l6.834-4.126a11 11 0 0 0 2.15-1.707c2.354-2.701 1.187-7.447-2.87-8.212"/>
+            <linearGradient id="bing-c" gradientUnits="userSpaceOnUse" x1="24.223" y1="17.113" x2="45.699" y2="38.588">
+                <stop offset="0" style="stop-color:#3dbffd"/>
+                <stop offset="1" style="stop-color:#1de9b6"/>
+            </linearGradient>
+            <path style="fill:url(#bing-c)" d="m33.636 19.568-7.607-3.803c-1.234-.617-2.576.618-2.064 1.899l1.755 5.886a5 5 0 0 0 2.719 2.758L32.5 28c4.057.766 5.352 5.251 3.052 8.117 4.847-4.877 4.536-13.323-1.916-16.549"/> `
+    },
+    "https://duckduckgo.com/": {
+        placeholder: "Search on DuckDuckGo . . .",
+        outlineColor: "#DE5933",
+        viewBox: "4 4 41 41", // Thêm viewBox cho DuckDuckGo
+        svgHtml: `
+            <path style="fill:#ff3d00" d="M44 24c0 11-9 20-20 20S4 35 4 24 13 4 24 4s20 9 20 20" />
+            <path style="fill:#fff" d="M26 16.2c-.6-.6-1.5-.9-2.5-1.1-.4-.5-1-1-1.9-1.5-1.6-.8-3.5-1.2-5.3-.9h-.4c-.1 0-.2.1-.4.1.2 0 1 .4 1.6.6-.3.2-.8.2-1.1.4h-.1l-.2.2c-.1.2-.2.4-.2.5 1.3-.1 3.2 0 4.6.4-1.1.1-2.1.4-2.8.8-.5.3-1 .6-1.3 1.1-1.2 1.3-1.7 3.5-1.3 5.9.5 2.7 2.4 11.4 3.4 16.3l.3 1.6s3.5.4 5.6.4c1.2 0 3.2.3 3.7-.2-.1 0-.6-.6-.8-1.1-.5-1-1-1.9-1.4-2.6-1.2-2.5-2.5-5.9-1.9-8.1.1-.4.1-2.1.4-2.3 2.6-1.7 2.4-.1 3.5-.8.5-.4 1-.9 1.2-1.5.7-2.3-.9-6.4-2.7-8.2" />
+            <path style="fill:#fff" d="M24 42c-9.9 0-18-8.1-18-18S14.1 6 24 6s18 8.1 18 18-8.1 18-18 18m0-34C15.2 8 8 15.2 8 24s7.2 16 16 16 16-7.2 16-16S32.8 8 24 8" />
+            <path style="fill:#0277bd" d="M19 21.1c-.6 0-1.2.5-1.2 1.2 0 .6.5 1.2 1.2 1.2.6 0 1.2-.5 1.2-1.2-.1-.6-.6-1.2-1.2-1.2m.5 1.1q-.3 0-.3-.3t.3-.3c.3 0 .3.1.3.3s-.2.3-.3.3m7.3-1.6c-.6 0-1 .5-1 1 0 .6.5 1 1 1 .6 0 1-.5 1-1s-.5-1-1-1m.4.9c-.1 0-.3-.1-.3-.3 0-.1.1-.3.3-.3.1 0 .3.1.3.3s-.1.3-.3.3m-7.9-2.6s-.9-.4-1.7.1c-.9.5-.8 1.1-.8 1.1s-.5-1 .8-1.5c1.1-.5 1.7.3 1.7.3m8.1-.1s-.6-.4-1.1-.4c-1 0-1.3.5-1.3.5s.2-1.1 1.5-.9c.6.2.9.8.9.8" />
+            <path style="fill:#8bc34a" d="M23.3 35.7s-4.3-2.3-4.4-1.4 0 4.7.5 5 4.1-1.9 4.1-1.9zm1.7-.1s2.9-2.2 3.6-2.1c.6.1.8 4.7.2 4.9s-3.9-1.2-3.9-1.2z" />
+            <path style="fill:#689f38" d="M22.5 35.7c0 1.5-.2 2.1.4 2.3.6.1 1.9 0 2.3-.3s.1-2.2-.1-2.6c-.1-.3-2.6 0-2.6.6" />
+            <path style="fill:#ffca28" d="M22.3 26.8c.1-.7 2-2.1 3.3-2.2s1.7-.1 2.8-.3c1.1-.3 3.9-1 4.7-1.3.8-.4 4.1.2 1.8 1.5-1 .6-3.7 1.6-5.7 2.2-1.9.6-3.1-.6-3.8.4-.5.8-.1 1.8 2.2 2 3.1.3 6.2-1.4 6.5-.5s-2.7 2-4.6 2.1c-1.8 0-5.6-1.2-6.1-1.6s-1.2-1.3-1.1-2.3" />
+        `
+    }
 };
 
+// Hàm để cập nhật icon, placeholder, màu outline và viewBox
+function updateSearchUI(engineUrl) {
+    const data = engineData[engineUrl];
+    if (data) {
+        searchForm.action = engineUrl;
+        searchBar.placeholder = data.placeholder;
+        searchBar.style.outlineColor = data.outlineColor;
+        searchIconContainer.setAttribute('viewBox', data.viewBox);
+        searchIconContainer.innerHTML = data.svgHtml;
+    }
+}
 // Toggle options visibility
-searchIcon.addEventListener('click', () => {
+searchIconContainer.addEventListener('click', () => {
     searchOptions.classList.toggle('active');
-    blur.classList.toggle('active');
+    blurElement.classList.toggle('active');
 });
 
 // Change search engine and placeholder
 searchOptions.addEventListener('click', (event) => {
-    const link = event.target.closest('a'); // Tìm phần tử <a>
+    const link = event.target.closest('a');
     if (link) {
-        event.preventDefault(); // Ngăn chuyển hướng
+        event.preventDefault();
 
         const engine = link.getAttribute('data-engine');
-        const icon = link.getAttribute('data-icon');
-
-        // Cập nhật URL action
-        searchForm.action = engine;
-
-        // Cập nhật biểu tượng
-        searchIcon.src = icon;
-
-        // Cập nhật placeholder
-        searchBar.placeholder = placeholders[engine] || "Search...";
-
-        // Ẩn menu sau khi chọn
+        updateSearchUI(engine);
         searchOptions.classList.remove('active');
-        blur.classList.remove('active');
+        blurElement.classList.remove('active');
     }
 });
 
 // Close options when clicking outside
 document.addEventListener('click', (event) => {
-    if (!searchIcon.contains(event.target) && !searchOptions.contains(event.target)) {
+    if (!searchIconContainer.contains(event.target) && !searchOptions.contains(event.target)) {
         searchOptions.classList.remove('active');
-        blur.classList.remove('active');
+        blurElement.classList.remove('active');
     }
 });
 
@@ -56,10 +136,10 @@ document.addEventListener('click', (event) => {
 document.getElementById('search-form').addEventListener('submit', function (e) {
     e.preventDefault();
 
-    var query = searchBar.value.trim();
+    let query = searchBar.value.trim();
 
     // Biểu thức chính quy kiểm tra URL (đã cải tiến)
-    var urlRegex = /^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/i;
+    const urlRegex = /^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/i;
 
     if (urlRegex.test(query)) {
         // Nếu là URL hợp lệ, chuyển hướng đến URL đó
@@ -69,49 +149,17 @@ document.getElementById('search-form').addEventListener('submit', function (e) {
         window.location.href = query;
     } else {
         // Nếu không phải URL, tìm kiếm theo công cụ đã chọn
-        var searchEngineUrl = searchForm.action;
+        const searchEngineUrl = searchForm.action;
         window.location.href = searchEngineUrl + '?q=' + encodeURIComponent(query);
     }
 });
 
+// Thiết lập trạng thái ban đầu khi tải trang
 document.addEventListener('DOMContentLoaded', function () {
-    searchLinks.forEach(link => {
-        link.addEventListener('click', function (event) {
-            event.preventDefault();
-            const engine = this.getAttribute('data-engine');
-            const icon = this.getAttribute('data-icon');
-            searchForm.action = engine;
-            searchIcon.src = icon;
-            searchBar.placeholder = `Search on ${this.textContent.trim()} ...`;
-            updateOutlineColor(this.textContent.trim());
-        });
-    });
-
-    function updateOutlineColor(engineName) {
-        let color;
-        switch (engineName) {
-            case 'Google':
-                color = '#FEC319';
-                break;
-            case 'SearXNG':
-                color = 'blue';
-                break;
-            case 'Brave':
-                color = '#FF2F00';
-                break;
-            case 'Bing':
-                color = '#5083DF';
-                break;
-            case 'DuckDuckGo':
-                color = '#DE5933';
-                break;
-            default:
-                color = '#FEC319';
-        }
-        searchBar.style.outlineColor = color;
-    }
+    // Tìm URL của công cụ tìm kiếm mặc định từ action của form (ban đầu là Google)
+    const defaultEngineUrl = searchForm.action;
+    updateSearchUI(defaultEngineUrl);
 });
-
 
 
 // Segment mappings for digits 0-9
@@ -159,7 +207,7 @@ function updateDigit(prefix, digit) {
         const element = document.getElementById(`${prefix}-${segment}`);
         if (element) {
             if (activeSegments.includes(segment)) {
-                element.style.fill = 'rgb(255, 247, 0)';
+                element.style.fill = 'rgb(57, 162, 255)';
                 element.style.transition = 'fill 0.3s ease';
             } else {
                 element.style.fill = 'rgba(0, 0, 0, 0.1)';
@@ -264,6 +312,50 @@ document.querySelectorAll('.popup-bookmarks-grid .bookmark-item')
         el.style.animationDelay = `${delay}s`;
     });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ngôi sao //
+function createBoxShadows(count, maxX, maxY) {
+    let shadows = [];
+    for (let i = 0; i < count; i++) {
+        const x = Math.floor(Math.random() * maxX);
+        const y = Math.floor(Math.random() * maxY);
+        shadows.push(`${x}px ${y}px #FFF`);
+    }
+    return shadows.join(', ');
+}
+
+const starsElement = document.getElementById('stars');
+const stars2Element = document.getElementById('stars2');
+const stars3Element = document.getElementById('stars3');
+
+const expandedWidth = 900;
+const expandedHeight = 1200;
+const bufferHeight = 100;
+
+if (starsElement) {
+    starsElement.style.boxShadow = createBoxShadows(700, expandedWidth, expandedHeight + bufferHeight);
+    starsElement.style.setProperty('--star-animation-height', `${expandedHeight + bufferHeight}px`);
+}
+if (stars2Element) {
+    stars2Element.style.boxShadow = createBoxShadows(200, expandedWidth, expandedHeight + bufferHeight);
+    stars2Element.style.setProperty('--star-animation-height', `${expandedHeight + bufferHeight}px`);
+}
+if (stars3Element) {
+    stars3Element.style.boxShadow = createBoxShadows(100, expandedWidth, expandedHeight + bufferHeight);
+    stars3Element.style.setProperty('--star-animation-height', `${expandedHeight + bufferHeight}px`);
+}
 
 
 
@@ -544,7 +636,7 @@ function formatFileSize(bytes) {
 }
 
 // --- HÀM HỖ TRỢ RÚT GỌN TÊN FILE ---
-function shortenFileName(fileName, maxLength = 30, isAudioFile = false) {
+function shortenFileName(fileName, maxLength = 35, isAudioFile = false) {
     if (isAudioFile) {
         return fileName;
     }
@@ -766,7 +858,7 @@ function appendMessageToChat(message) {
         const fileSizeFormatted = formatFileSize(message.fileSize);
         const fileIconSvg = typeof getFileIconSvg === 'function' ? getFileIconSvg(fileExtension) : '';
         const isAudio = message.mimeType.startsWith('audio/');
-        const displayFileName = shortenFileName(message.fileName, 30, isAudio);
+        const displayFileName = shortenFileName(message.fileName, 35, isAudio);
         if (message.mimeType.startsWith('image/')) {
             contentHtml = `<img src="${message.fileUrl}" alt="${escapeHtml(message.fileName)}" class="chat-image">`;
         } else if (message.mimeType.startsWith('video/')) {
