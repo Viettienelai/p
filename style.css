@@ -51,7 +51,6 @@ body {
   position: absolute;
   inset: 0;
   border-radius: 24px;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
 }
 
 .clock-glass-effect.cl1 {
@@ -122,7 +121,7 @@ body {
 
 .bar-container.bC1 {
   position: relative;
-  width: calc(100% - 10px);
+  width: calc(100% - 20px);
   max-width: 800px;
   height: 70px;
   font-size: 16px;
@@ -143,9 +142,8 @@ body {
   height: 100%;
   display: flex;
   flex-direction: row;
-  gap: 20px;
-  z-index: 2;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+  gap: 15px;
+  z-index: 3;
 }
 
 #search-form:has(#search-bar:focus) {
@@ -157,27 +155,6 @@ body {
   position: relative;
   height: 100%;
   z-index: 0;
-}
-
-#chat-bubble-fake {
-  width: 50px;
-  height: 50px;
-  background: transparent;
-  transition:
-    width 1s cubic-bezier(0.175, 0.885, 0.32, 1.1),
-    height 1s cubic-bezier(0.175, 0.885, 0.32, 1.1),
-    top 1s ease-in-out,
-    right 1s ease-in-out;
-}
-
-#chat-bubble.expanded+#search-form #chat-bubble-fake {
-  width: 380px;
-  height: 600px;
-  transition:
-    top 1s cubic-bezier(0.175, 0.885, 0.32, 1.1),
-    right 1s cubic-bezier(0.175, 0.885, 0.32, 1.1),
-    height 1s ease-in-out,
-    width 1s ease-in-out;
 }
 
 #search-bar-glass-effect {
@@ -208,11 +185,10 @@ body {
     0 6px 6px rgba(0, 0, 0, 0.2),
     0 0 20px rgba(0, 0, 0, 0.1);
   z-index: 2;
-  transition: all 0.3s ease-out;
 }
 
 #search-bar::placeholder {
-  color: #484848;
+  color: #717171;
 }
 
 #search-bar:focus {
@@ -229,7 +205,6 @@ body {
   height: 30px;
   cursor: pointer;
   z-index: 2;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.5);
   filter: drop-shadow(0 0 10px rgba(255, 255, 255, 1)) drop-shadow(0 0 5px rgba(255, 255, 255, 1));
 }
 
@@ -248,10 +223,6 @@ body {
   transform: scale(1.2);
   overflow: hidden;
   z-index: 1;
-  transition:
-    transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2),
-    width 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.5),
-    height 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.5);
 }
 
 #search-options.active {
@@ -260,10 +231,6 @@ body {
   height: 270px;
   box-sizing: border-box;
   transform: scale(1);
-  transition:
-    transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 2.2),
-    width 0.875s cubic-bezier(0.175, 0.885, 0.32, 1.2),
-    height 0.875s cubic-bezier(0.175, 0.885, 0.32, 1.2);
 }
 
 #search-options-glass-effect-1 {
@@ -318,7 +285,6 @@ body {
   text-decoration: none;
   opacity: 1;
   transform: scale(1);
-  transition: all 0.3s ease-out;
 }
 
 .option-icon {
@@ -336,7 +302,6 @@ body {
   width: 140vw;
   height: 140vh;
   z-index: 0;
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1);
 }
 
 #background-blur-search-options.active {
@@ -346,7 +311,7 @@ body {
 }
 
 #bookmark-container {
-  width: 370px;
+  width: 360px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -371,7 +336,6 @@ body {
 
 .container {
   position: relative;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
 }
 
 .container-glass-effect {
@@ -387,7 +351,7 @@ body {
 }
 
 .container-glass-effect.bmg2 {
-  padding: 10px 15px;
+  padding: 10px 10px;
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -399,7 +363,6 @@ body {
     0 6px 6px rgba(0, 0, 0, 0.2),
     0 0 20px rgba(0, 0, 0, 0.1);
   z-index: 2;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
 }
 
 .bookmark-item a {
@@ -413,7 +376,6 @@ body {
   justify-content: space-evenly;
   text-decoration: none;
   z-index: 1;
-  transition: all 0.3s ease-out;
 }
 
 .bookmark-avatar {
@@ -484,7 +446,6 @@ body {
   box-sizing: border-box;
   transform-origin: 0 0;
   z-index: 3;
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1);
 }
 
 .popup-container.active {
@@ -544,7 +505,6 @@ body {
   width: 90px;
   position: static;
   box-sizing: border-box;
-  transition: all 0.3s cubic-bezier(.25, .46, .45, .94);
   border-radius: 14px;
 }
 
@@ -594,9 +554,7 @@ body {
 }
 
 #chat-bubble {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+  position: relative;
   width: 50px;
   height: 50px;
   border-radius: 25px;
@@ -604,25 +562,15 @@ body {
   pointer-events: auto;
   overflow: hidden;
   z-index: 4;
-  transition: transform .4s cubic-bezier(0.175, 0.885, 0.32, 3.5),
-    width 1s cubic-bezier(0.175, 0.885, 0.32, 1.1),
-    height 1s cubic-bezier(0.175, 0.885, 0.32, 1.1),
-    top 1s ease-in-out,
-    right 1s ease-in-out;
 }
 
 #chat-bubble.expanded {
   top: -80px;
-  right: 5px;
+  right: 10px;
   width: 380px;
   height: 600px;
   border-radius: 24px;
   z-index: 5;
-  transition:
-    top 1s cubic-bezier(0.175, 0.885, 0.32, 1.1),
-    right 1s cubic-bezier(0.175, 0.885, 0.32, 1.1),
-    height 1s ease-in-out,
-    width 1s ease-in-out;
 }
 
 #chat-bubble:not(.expanded) {
@@ -679,7 +627,6 @@ body {
   position: relative;
   cursor: pointer;
   z-index: 5;
-  transition: all .3s linear;
 }
 
 #note-background::before {
@@ -694,7 +641,6 @@ body {
     0 0 25px #3195ff;
   border-bottom-right-radius: 100%;
   transform: translateX(-45px) translateY(-45px);
-  transition: all 0.3s ease-in-out;
   opacity: 0;
   z-index: 1;
 
@@ -709,7 +655,6 @@ body {
   height: 30px;
   z-index: 2;
   opacity: 0;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
 }
 
 #chat-bubble:not(.expanded) .note-icon {
@@ -789,8 +734,7 @@ body {
   backdrop-filter: blur(10px);
   opacity: 0;
   visibility: hidden;
-  z-index: 3;
-  transition: all .3s linear;
+  z-index: 2;
 }
 
 .background-blur-chat.active {
@@ -801,9 +745,8 @@ body {
 
 .chat-toolbar {
   position: absolute;
-  width: 700px;
+  width: 100%;
   bottom: 0;
-  right: 100px;
   padding: 15px;
   box-sizing: border-box;
   display: flex;
@@ -814,7 +757,14 @@ body {
   box-shadow:
     inset 10px 10px 7px -7px rgba(255, 255, 255, 1);
   z-index: 7;
-  transition: all 0.3s ease;
+}
+
+#chat-bubble:not(.expanded) .chat-toolbar {
+  right: 200px;
+}
+
+#chat-bubble.expanded .chat-toolbar {
+  right: 0px;
 }
 
 .plus-button {
@@ -825,7 +775,6 @@ body {
   width: 50px;
   cursor: pointer;
   border-radius: 50%;
-  transition: all 0.3s ease;
 }
 
 .plus-button svg {
@@ -841,7 +790,6 @@ body {
   width: 50px;
   cursor: pointer;
   border-radius: 50%;
-  transition: all 0.3s ease;
 }
 
 .send-button svg {
@@ -895,7 +843,6 @@ body {
   background-size: 200% 100%;
   animation: gradientAnimation 1s linear infinite;
   z-index: 0;
-  transition: all 0.5s ease;
 }
 
 @keyframes gradientAnimation {
@@ -939,7 +886,6 @@ body {
   word-wrap: break-word;
   flex-shrink: 0;
   align-self: flex-end;
-  transition: all 0.3s ease;
   transform-origin: right;
   display: flex;
   justify-content: center;
@@ -961,14 +907,12 @@ body {
   max-width: 400px;
   max-height: 300px;
   border-radius: 14px;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
 }
 
 .chat-video {
   max-width: 400px;
   max-height: 300px;
   border-radius: 14px;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
 }
 
 .chat-file {
@@ -977,7 +921,6 @@ body {
   box-sizing: border-box;
   border-radius: 14px;
   background-color: rgba(80, 80, 80, 0.5);
-  transition: all 0.3s ease;
 }
 
 .message-box:has(.chat-file) {
@@ -1044,7 +987,6 @@ body {
   box-sizing: border-box;
   border-radius: 25px;
   background-color: rgba(80, 80, 80, 0.3);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .chat-audio .file-avatar-container {
@@ -1080,7 +1022,6 @@ body {
   padding: 10px 20px;
   border-radius: 5px;
   opacity: 0;
-  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
   z-index: 100;
   font-size: 0.9em;
 }
@@ -1103,7 +1044,6 @@ body {
   cursor: pointer;
   color: white;
   opacity: 0;
-  transition: all 0.3s cubic-bezier(0.2, 0.95, 0.4, 0.95);
   overflow: hidden;
 }
 
@@ -1117,14 +1057,12 @@ body {
   background: rgba(0, 0, 0, 0.2);
   right: -45px;
   transform: translateY(-50%) translateX(-10px);
-  transition: all 0.3s ease-out;
 }
 
 .interaction-button.red {
   background: rgba(0, 0, 0, 0.2);
   right: -90px;
   transform: translateY(-50%) translateX(-55px);
-  transition: all 0.3s ease-out;
 }
 
 .interaction-button.active {
@@ -1160,7 +1098,6 @@ body {
   z-index: 10;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s ease-out;
 }
 
 #toolbar-loading-overlay.active {
@@ -1242,23 +1179,17 @@ body {
 
 .loading-overlay {
   position: absolute;
-
   top: 0;
   left: 0;
   inset: 0;
   backdrop-filter: blur(10px);
-
   background-color: rgba(0, 0, 0, 0.8);
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   opacity: 0;
   visibility: hidden;
   z-index: 6;
-  transition: all 0.3s ease
-
 }
 
 #chat-bubble:not(.expanded) .loading-overlay.active {
@@ -1329,10 +1260,6 @@ body {
 .scroll-to-bottom-btn.show {
   opacity: 1;
   visibility: visible;
-}
-
-.scroll-to-bottom-btn svg {
-  transition: transform 0.2s ease;
 }
 
 body.no-scroll {

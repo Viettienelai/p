@@ -131,89 +131,48 @@
     <div class="bar-container bC1">
         <div class="bar-container bC2">
             <div class="background-blur-chat"></div>
-            <div id="chat-bubble">
-                <div class="bubble-glass-effect bb1"></div>
-                <div class="bubble-glass-effect bb2"></div>
-                <div class="background-stars">
-                    <div id="stars"></div>
-                    <div id="stars2"></div>
-                    <div id="stars3"></div>
-                </div>
-                <div class="chat-content-area">
-                </div>
-                <button id="scroll-to-bottom-btn" class="scroll-to-bottom-btn">
-                    <svg viewBox="0 0 48 48">
-                        <path fill="#FFFFFF"
-                            d="M26.981 9.461c-.002-1.414-1.107-2.459-2.504-2.461-1.396 0-2.472 1.17-2.47 2.586l.024 20.699-5.718-5.763c-.987-1-2.588-.998-3.576 0-0.985.998-.983 2.619.005 3.621l9.843 9.967.071.068c.463.508 1.125.826 1.859.826.734.002 1.397-.314 1.857-.82l.068-.071 9.822-9.945c.985-.998.985-2.619-.005-3.619-.987-1-2.588-1.004-3.575-.004l-5.677 5.619-.024-20.699z" />
-                    </svg>
 
-                </button>
-                <div id="note-background">
-                    <svg id="note-default" class="note-icon active" viewBox="0 0 100 100" fill="none">
-                        <g transform="translate(0 -3)">
-                            <rect transform="rotate(15)" width="70" rx="5" height="75" x="20" fill="#00A1E5" />
-                            <g transform="rotate(-7)">
-                                <rect width="70" rx="5" height="75" x="18" y="28" fill="#FFDE59" />
-                                <path d="M40 45h30ZM30 55h45Zm0 10h45Zm0 10h45Zm0 10h25Z" stroke="orange"
-                                    stroke-width="4" stroke-linejoin="round" />
+            <form id="search-form" action="https://www.google.com/search" method="get">
+                <div id="search-bar-container">
+                    <input type="text" id="search-bar" name="q" placeholder="Search on Google . . ." autocomplete="off">
+                    <div id="search-bar-glass-effect"></div>
+                </div>
+                <div id="chat-bubble">
+                    <div class="bubble-glass-effect bb1"></div>
+                    <div class="bubble-glass-effect bb2"></div>
+                    <div class="background-stars">
+                        <div id="stars"></div>
+                        <div id="stars2"></div>
+                        <div id="stars3"></div>
+                    </div>
+                    <div class="chat-content-area">
+                    </div>
+                    <button id="scroll-to-bottom-btn" class="scroll-to-bottom-btn">
+                        <svg viewBox="0 0 48 48">
+                            <path fill="#FFFFFF"
+                                d="M26.981 9.461c-.002-1.414-1.107-2.459-2.504-2.461-1.396 0-2.472 1.17-2.47 2.586l.024 20.699-5.718-5.763c-.987-1-2.588-.998-3.576 0-0.985.998-.983 2.619.005 3.621l9.843 9.967.071.068c.463.508 1.125.826 1.859.826.734.002 1.397-.314 1.857-.82l.068-.071 9.822-9.945c.985-.998.985-2.619-.005-3.619-.987-1-2.588-1.004-3.575-.004l-5.677 5.619-.024-20.699z" />
+                        </svg>
+
+                    </button>
+                    <div id="note-background">
+                        <svg id="note-default" class="note-icon active" viewBox="0 0 100 100" fill="none">
+                            <g transform="translate(0 -3)">
+                                <rect transform="rotate(15)" width="70" rx="5" height="75" x="20" fill="#00A1E5" />
+                                <g transform="rotate(-7)">
+                                    <rect width="70" rx="5" height="75" x="18" y="28" fill="#FFDE59" />
+                                    <path d="M40 45h30ZM30 55h45Zm0 10h45Zm0 10h45Zm0 10h25Z" stroke="orange"
+                                        stroke-width="4" stroke-linejoin="round" />
+                                </g>
                             </g>
-                        </g>
-                    </svg>
-
-                    <svg id="note-hover" class="note-icon" viewBox="1.5 1.5 21 21">
-                        <path fill="white"
-                            d="M4 12a1 1 0 0 1-2 0 9.983 9.983 0 0 1 16.242-7.794V2.758a1 1 0 1 1 2 0v4a1 1 0 0 1-1 1h-4a1 1 0 0 1 0-2h1.743A7.986 7.986 0 0 0 4 12m17-1a1 1 0 0 0-1 1 7.986 7.986 0 0 1-12.985 6.242h1.742a1 1 0 1 0 0-2h-4a1 1 0 0 0-1 1v4a1 1 0 0 0 2 0v-1.448A9.984 9.984 0 0 0 22 12a1 1 0 0 0-1-1" />
-                    </svg>
-
-                </div>
-                <div id="sync-loading-overlay" class="loading-overlay">
-                    <div class="waterfall">
-                        <div style="--dot: #489dff;"></div>
-                        <div style="--dot: #ff7171;"></div>
-                        <div style="--dot: #e969ff;"></div>
-                        <div style="--dot: #6cff71;"></div>
-                        <div style="--dot: #ffd862;"></div>
-                    </div>
-                </div>
-                <div class="chat-toolbar">
-                    <button class="plus-button" aria-label="Thêm">
-                        <svg width="40" height="40" viewBox="0 0 100 100">
-                            <defs>
-                                <linearGradient id="blueGradientCircle" x1="0" y1="0" x2="1" y2="1">
-                                    <stop offset="0%" stop-color="#00c3ff" />
-                                    <stop offset="100%" stop-color="#007bff" />
-                                </linearGradient>
-                            </defs>
-                            <circle cx="50" cy="50" r="48" fill="url(#blueGradientCircle)" />
-                            <rect x="45" y="30" width="10" height="40" rx="4" ry="4" fill="white" />
-                            <rect x="30" y="45" width="40" height="10" rx="4" ry="4" fill="white" />
                         </svg>
-                    </button>
 
-                    <input type="file" id="file-input" style="display: none;" multiple accept="*/*">
-
-                    <div class="text-area">
-                        <div class="text-gradient-1"></div>
-                        <div class="text-gradient-1"></div>
-                        <div class="text-gradient-1"></div>
-                        <textarea class="text-input" placeholder="Nhập tin nhắn..." rows="1"></textarea>
-                    </div>
-
-                    <button class="send-button" aria-label="Gửi">
-                        <svg viewBox="0 0 200 200">
-                            <defs>
-                                <linearGradient id="blueGradient" x1="0" y1="0" x2="1" y2="1">
-                                    <stop offset="0%" stop-color=" #00c3ff" />
-                                    <stop offset="100%" stop-color=" #007bff" />
-                                </linearGradient>
-                            </defs>
-                            <path
-                                d="M40,40 C35,50 35,50 45,85 Q50,90 80,93 A7,7 0 0 1 80,107 Q50,110 45,115 C35,150 35,150 40,160 Q45,170 60,163 L160,110 Q170,105 170,100 Q170,95 160,90 L60,37 Q45,30 40,40Z"
-                                fill="url(#blueGradient)" />
+                        <svg id="note-hover" class="note-icon" viewBox="1.5 1.5 21 21">
+                            <path fill="white"
+                                d="M4 12a1 1 0 0 1-2 0 9.983 9.983 0 0 1 16.242-7.794V2.758a1 1 0 1 1 2 0v4a1 1 0 0 1-1 1h-4a1 1 0 0 1 0-2h1.743A7.986 7.986 0 0 0 4 12m17-1a1 1 0 0 0-1 1 7.986 7.986 0 0 1-12.985 6.242h1.742a1 1 0 1 0 0-2h-4a1 1 0 0 0-1 1v4a1 1 0 0 0 2 0v-1.448A9.984 9.984 0 0 0 22 12a1 1 0 0 0-1-1" />
                         </svg>
-                    </button>
 
-                    <div id="toolbar-loading-overlay">
+                    </div>
+                    <div id="sync-loading-overlay" class="loading-overlay">
                         <div class="waterfall">
                             <div style="--dot: #489dff;"></div>
                             <div style="--dot: #ff7171;"></div>
@@ -222,17 +181,58 @@
                             <div style="--dot: #ffd862;"></div>
                         </div>
                     </div>
-                </div>
-            </div>
+                    <div class="chat-toolbar">
+                        <button class="plus-button" aria-label="Thêm">
+                            <svg width="40" height="40" viewBox="0 0 100 100">
+                                <defs>
+                                    <linearGradient id="blueGradientCircle" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0%" stop-color="#00c3ff" />
+                                        <stop offset="100%" stop-color="#007bff" />
+                                    </linearGradient>
+                                </defs>
+                                <circle cx="50" cy="50" r="48" fill="url(#blueGradientCircle)" />
+                                <rect x="45" y="30" width="10" height="40" rx="4" ry="4" fill="white" />
+                                <rect x="30" y="45" width="40" height="10" rx="4" ry="4" fill="white" />
+                            </svg>
+                        </button>
 
-            <form id="search-form" action="https://www.google.com/search" method="get">
-                <div id="search-bar-container">
-                    <input type="text" id="search-bar" name="q" placeholder="Search on Google . . ." autocomplete="off">
-                    <div id="search-bar-glass-effect"></div>
+                        <input type="file" id="file-input" style="display: none;" multiple accept="*/*">
+
+                        <div class="text-area">
+                            <div class="text-gradient-1"></div>
+                            <div class="text-gradient-1"></div>
+                            <div class="text-gradient-1"></div>
+                            <textarea class="text-input" placeholder="Nhập tin nhắn..." rows="1"></textarea>
+                        </div>
+
+                        <button class="send-button" aria-label="Gửi">
+                            <svg viewBox="0 0 200 200">
+                                <defs>
+                                    <linearGradient id="blueGradient" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0%" stop-color=" #00c3ff" />
+                                        <stop offset="100%" stop-color=" #007bff" />
+                                    </linearGradient>
+                                </defs>
+                                <path
+                                    d="M40,40 C35,50 35,50 45,85 Q50,90 80,93 A7,7 0 0 1 80,107 Q50,110 45,115 C35,150 35,150 40,160 Q45,170 60,163 L160,110 Q170,105 170,100 Q170,95 160,90 L60,37 Q45,30 40,40Z"
+                                    fill="url(#blueGradient)" />
+                            </svg>
+                        </button>
+
+                        <div id="toolbar-loading-overlay">
+                            <div class="waterfall">
+                                <div style="--dot: #489dff;"></div>
+                                <div style="--dot: #ff7171;"></div>
+                                <div style="--dot: #e969ff;"></div>
+                                <div style="--dot: #6cff71;"></div>
+                                <div style="--dot: #ffd862;"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div id="chat-bubble-fake"></div>
                 <svg id="search-icon" viewBox="1 1 23 23"></svg>
             </form>
+            
             <div id="background-blur-search-options"></div>
 
             <ul id="search-options">
@@ -274,9 +274,13 @@
                     <li>
                         <a href="https://search.brave.com/search" data-engine="https://search.brave.com/search">
                             <svg class="option-icon" viewBox="0 0 56 64">
-  <path d="m53.292 15.321 1.5-3.676s-1.909-2.043-4.227-4.358c-2.317-2.315-7.225-.953-7.225-.953L37.751 0H18.12l-5.589 6.334s-4.908-1.362-7.225.953C2.988 9.602 1.08 11.645 1.08 11.645l1.5 3.676-1.91 5.447s5.614 21.236 6.272 23.83c1.295 5.106 2.181 7.08 5.862 9.668s10.36 7.08 11.45 7.762c1.091.68 2.455 1.84 3.682 1.84s2.59-1.16 3.68-1.84 7.77-5.175 11.452-7.762c3.68-2.587 4.567-4.562 5.862-9.668.657-2.594 6.27-23.83 6.27-23.83z" fill="#FF481A"/>
-  <path d="M34.888 11.508c.818 0 6.885-1.157 6.885-1.157s7.189 8.68 7.189 10.536c0 1.534-.619 2.134-1.347 2.842-.152.148-.31.3-.467.468l-5.39 5.717-.176.18c-.538.54-1.33 1.336-.772 2.658l.115.269c.613 1.432 1.37 3.2.407 4.99-1.025 1.906-2.78 3.178-3.905 2.967s-3.766-1.589-4.737-2.218c-.971-.63-4.05-3.166-4.05-4.137 0-.809 2.214-2.155 3.29-2.81.214-.13.383-.232.48-.298.111-.075.297-.19.526-.332.981-.61 2.754-1.71 2.799-2.197.055-.602.034-.778-.758-2.264-.168-.316-.365-.654-.568-1.004-.754-1.295-1.598-2.745-1.41-3.784.21-1.173 2.05-1.845 3.608-2.415q.292-.105.567-.209l1.623-.609c1.556-.582 3.284-1.229 3.57-1.36.394-.181.292-.355-.903-.468l-.58-.06c-1.48-.157-4.209-.446-5.535-.077-.261.073-.553.152-.86.235-1.49.403-3.317.897-3.493 1.182q-.045.074-.089.133c-.168.238-.277.394-.091 1.406.055.302.169.895.31 1.629.41 2.148 1.053 5.498 1.134 6.25q.017.159.036.305c.103.84.171 1.399-.805 1.622l-.255.058c-1.102.252-2.717.623-3.3.623-.584 0-2.2-.37-3.302-.623l-.254-.058c-.976-.223-.907-.782-.804-1.622q.018-.147.035-.305c.081-.753.725-4.112 1.137-6.259.14-.73.253-1.32.308-1.62.185-1.012.076-1.168-.092-1.406l-.09-.133c-.174-.285-2-.779-3.491-1.182-.307-.083-.6-.162-.86-.235-1.327-.37-4.055-.08-5.535.077q-.341.037-.58.06c-1.196.113-1.297.287-.903.468.285.131 2.013.778 3.568 1.36.597.223 1.17.437 1.624.609q.275.103.568.21c1.558.57 3.398 1.241 3.608 2.414.187 1.039-.657 2.489-1.41 3.784-.204.35-.4.688-.569 1.004-.791 1.486-.812 1.662-.757 2.264.044.488 1.816 1.587 2.798 2.197.229.142.415.257.526.332.098.066.266.168.48.298 1.076.654 3.29 2 3.29 2.81 0 .97-3.078 3.507-4.05 4.137-.97.63-3.612 2.008-4.737 2.218s-2.88-1.061-3.904-2.966c-.963-1.791-.207-3.559.406-4.99l.115-.27c.559-1.322-.233-2.118-.772-2.658l-.175-.18-5.39-5.717c-.158-.167-.316-.32-.468-.468-.728-.707-1.346-1.308-1.346-2.842 0-1.855 7.189-10.536 7.189-10.536s6.066 1.157 6.884 1.157c.653 0 1.913-.433 3.227-.885.333-.114.669-.23 1-.34 1.635-.545 2.726-.549 2.726-.549s1.09.004 2.726.549c.33.11.667.226 1 .34 1.313.452 2.574.885 3.226.885m-1.041 30.706c1.282.66 2.192 1.128 2.536 1.343.445.278.174.803-.232 1.09-.405.285-5.853 4.499-6.381 4.965l-.215.191c-.509.459-1.159 1.044-1.62 1.044-.46 0-1.11-.586-1.62-1.044l-.213-.191c-.53-.466-5.977-4.68-6.382-4.966s-.677-.81-.232-1.09c.344-.214 1.255-.683 2.539-1.344l1.22-.629c1.92-.992 4.315-1.837 4.689-1.837s2.767.844 4.689 1.837q.655.34 1.222.63z" fill="#fff"/>
-</svg>
+                                <path
+                                    d="m53.292 15.321 1.5-3.676s-1.909-2.043-4.227-4.358c-2.317-2.315-7.225-.953-7.225-.953L37.751 0H18.12l-5.589 6.334s-4.908-1.362-7.225.953C2.988 9.602 1.08 11.645 1.08 11.645l1.5 3.676-1.91 5.447s5.614 21.236 6.272 23.83c1.295 5.106 2.181 7.08 5.862 9.668s10.36 7.08 11.45 7.762c1.091.68 2.455 1.84 3.682 1.84s2.59-1.16 3.68-1.84 7.77-5.175 11.452-7.762c3.68-2.587 4.567-4.562 5.862-9.668.657-2.594 6.27-23.83 6.27-23.83z"
+                                    fill="#FF481A" />
+                                <path
+                                    d="M34.888 11.508c.818 0 6.885-1.157 6.885-1.157s7.189 8.68 7.189 10.536c0 1.534-.619 2.134-1.347 2.842-.152.148-.31.3-.467.468l-5.39 5.717-.176.18c-.538.54-1.33 1.336-.772 2.658l.115.269c.613 1.432 1.37 3.2.407 4.99-1.025 1.906-2.78 3.178-3.905 2.967s-3.766-1.589-4.737-2.218c-.971-.63-4.05-3.166-4.05-4.137 0-.809 2.214-2.155 3.29-2.81.214-.13.383-.232.48-.298.111-.075.297-.19.526-.332.981-.61 2.754-1.71 2.799-2.197.055-.602.034-.778-.758-2.264-.168-.316-.365-.654-.568-1.004-.754-1.295-1.598-2.745-1.41-3.784.21-1.173 2.05-1.845 3.608-2.415q.292-.105.567-.209l1.623-.609c1.556-.582 3.284-1.229 3.57-1.36.394-.181.292-.355-.903-.468l-.58-.06c-1.48-.157-4.209-.446-5.535-.077-.261.073-.553.152-.86.235-1.49.403-3.317.897-3.493 1.182q-.045.074-.089.133c-.168.238-.277.394-.091 1.406.055.302.169.895.31 1.629.41 2.148 1.053 5.498 1.134 6.25q.017.159.036.305c.103.84.171 1.399-.805 1.622l-.255.058c-1.102.252-2.717.623-3.3.623-.584 0-2.2-.37-3.302-.623l-.254-.058c-.976-.223-.907-.782-.804-1.622q.018-.147.035-.305c.081-.753.725-4.112 1.137-6.259.14-.73.253-1.32.308-1.62.185-1.012.076-1.168-.092-1.406l-.09-.133c-.174-.285-2-.779-3.491-1.182-.307-.083-.6-.162-.86-.235-1.327-.37-4.055-.08-5.535.077q-.341.037-.58.06c-1.196.113-1.297.287-.903.468.285.131 2.013.778 3.568 1.36.597.223 1.17.437 1.624.609q.275.103.568.21c1.558.57 3.398 1.241 3.608 2.414.187 1.039-.657 2.489-1.41 3.784-.204.35-.4.688-.569 1.004-.791 1.486-.812 1.662-.757 2.264.044.488 1.816 1.587 2.798 2.197.229.142.415.257.526.332.098.066.266.168.48.298 1.076.654 3.29 2 3.29 2.81 0 .97-3.078 3.507-4.05 4.137-.97.63-3.612 2.008-4.737 2.218s-2.88-1.061-3.904-2.966c-.963-1.791-.207-3.559.406-4.99l.115-.27c.559-1.322-.233-2.118-.772-2.658l-.175-.18-5.39-5.717c-.158-.167-.316-.32-.468-.468-.728-.707-1.346-1.308-1.346-2.842 0-1.855 7.189-10.536 7.189-10.536s6.066 1.157 6.884 1.157c.653 0 1.913-.433 3.227-.885.333-.114.669-.23 1-.34 1.635-.545 2.726-.549 2.726-.549s1.09.004 2.726.549c.33.11.667.226 1 .34 1.313.452 2.574.885 3.226.885m-1.041 30.706c1.282.66 2.192 1.128 2.536 1.343.445.278.174.803-.232 1.09-.405.285-5.853 4.499-6.381 4.965l-.215.191c-.509.459-1.159 1.044-1.62 1.044-.46 0-1.11-.586-1.62-1.044l-.213-.191c-.53-.466-5.977-4.68-6.382-4.966s-.677-.81-.232-1.09c.344-.214 1.255-.683 2.539-1.344l1.22-.629c1.92-.992 4.315-1.837 4.689-1.837s2.767.844 4.689 1.837q.655.34 1.222.63z"
+                                    fill="#fff" />
+                            </svg>
 
                             <p> Brave </p>
                         </a>
