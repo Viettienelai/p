@@ -438,8 +438,8 @@ body {
 
 .popup-container {
   position: absolute;
-  top: 50px;
-  left: 100px;
+  top: 60px;
+  left: 40px;
   width: 0;
   height: 0;
   border-radius: 24px;
